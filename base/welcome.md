@@ -11,7 +11,7 @@ Our team offers custom bioinformatics services to academic and private organizat
 
 
 <p align="center">
- <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/master/base/staff2.png" alt="welcome_figure2" width="800px"/>
+ <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/master/base/figures/staff2.png" alt="welcome_figure2" width="800px"/>
 </p>
 
 ## Contacts
