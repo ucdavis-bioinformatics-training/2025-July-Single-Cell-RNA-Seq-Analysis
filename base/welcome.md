@@ -3,7 +3,7 @@
 __The mission of the Bioinformatics Core facility is to facilitate outstanding omics-scale research through these activities:__
 
 <p align="center">
- <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2023-December-Single-Cell-RNA-Seq-Analysis/master/base/welcome_figure1.png" alt="welcome_figure1" width="800px"/>
+ <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2023-December-Single-Cell-RNA-Seq-Analysis/master/base/figures/welcome_figure1.png" alt="welcome_figure1" width="800px"/>
 </p>
 
 ## Staff and Students
@@ -11,7 +11,7 @@ Our team offers custom bioinformatics services to academic and private organizat
 
 
 <p align="center">
- <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2023-December-Single-Cell-RNA-Seq-Analysis/master/base/staff.png" alt="welcome_figure2" width="800px"/>
+ <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2023-December-Single-Cell-RNA-Seq-Analysis/master/base/staff2.png" alt="welcome_figure2" width="800px"/>
 </p>
 
 ## Contacts
