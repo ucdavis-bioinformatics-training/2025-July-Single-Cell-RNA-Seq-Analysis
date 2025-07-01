@@ -132,7 +132,7 @@ Seurat is an extensive package for the analysis of single cell experiments, from
 
 ``` r
 if (!any(rownames(installed.packages()) == "Seurat")){
-  BiocManager::install("Seurat")
+  install.packages("Seurat")
 }
 library(Seurat)
 ```

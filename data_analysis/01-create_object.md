@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Single Cell RNA-Seq Part 1: Create Seurat object"
 author: "UCD Bioinformatics Core"
-date: "2024-11-25"
+date: "2025-07-01"
 output:
     html_document:
       keep_md: TRUE
@@ -115,21 +115,21 @@ sequencing.metrics %>%
   <tr grouplength="3"><td colspan="4" style="background-color: #666; color: #fff;"><strong>Overview</strong></td></tr>
 <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Estimated Number of Cells </td>
-   <td style="text-align:left;"> 1,808 </td>
-   <td style="text-align:left;"> 3,164 </td>
-   <td style="text-align:left;"> 4,548 </td>
+   <td style="text-align:left;"> 1,763 </td>
+   <td style="text-align:left;"> 2,951 </td>
+   <td style="text-align:left;"> 4,393 </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Mean Reads per Cell </td>
-   <td style="text-align:left;"> 77,010 </td>
-   <td style="text-align:left;"> 150,265 </td>
-   <td style="text-align:left;"> 38,644 </td>
+   <td style="text-align:left;"> 78,975 </td>
+   <td style="text-align:left;"> 161,111 </td>
+   <td style="text-align:left;"> 40,007 </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Median Genes per Cell </td>
-   <td style="text-align:left;"> 937 </td>
-   <td style="text-align:left;"> 970 </td>
-   <td style="text-align:left;"> 1,336 </td>
+   <td style="text-align:left;"> 962 </td>
+   <td style="text-align:left;"> 1,017 </td>
+   <td style="text-align:left;"> 1,375 </td>
   </tr>
   <tr grouplength="6"><td colspan="4" style="background-color: #666; color: #fff;"><strong>Sequencing Characteristics</strong></td></tr>
 <tr>
@@ -141,8 +141,14 @@ sequencing.metrics %>%
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Valid Barcodes </td>
    <td style="text-align:left;"> 97.4% </td>
-   <td style="text-align:left;"> 95.4% </td>
+   <td style="text-align:left;"> 95.3% </td>
    <td style="text-align:left;"> 98.5% </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Valid UMIs </td>
+   <td style="text-align:left;"> 100.0% </td>
+   <td style="text-align:left;"> 100.0% </td>
+   <td style="text-align:left;"> 99.9% </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Sequencing Saturation </td>
@@ -162,14 +168,14 @@ sequencing.metrics %>%
    <td style="text-align:left;"> 94.4% </td>
    <td style="text-align:left;"> 94.1% </td>
   </tr>
-  <tr>
+  <tr grouplength="10"><td colspan="4" style="background-color: #666; color: #fff;"><strong>Mapping Characteristics</strong></td></tr>
+<tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Q30 Bases in UMI </td>
    <td style="text-align:left;"> 97.5% </td>
    <td style="text-align:left;"> 96.4% </td>
    <td style="text-align:left;"> 96.5% </td>
   </tr>
-  <tr grouplength="10"><td colspan="4" style="background-color: #666; color: #fff;"><strong>Mapping Characteristics</strong></td></tr>
-<tr>
+  <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Reads Mapped to Genome </td>
    <td style="text-align:left;"> 94.3% </td>
    <td style="text-align:left;"> 92.1% </td>
@@ -213,21 +219,15 @@ sequencing.metrics %>%
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Fraction Reads in Cells </td>
-   <td style="text-align:left;"> 29.8% </td>
-   <td style="text-align:left;"> 37.8% </td>
-   <td style="text-align:left;"> 36.9% </td>
+   <td style="text-align:left;"> 29.6% </td>
+   <td style="text-align:left;"> 37.2% </td>
+   <td style="text-align:left;"> 36.6% </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Total Genes Detected </td>
-   <td style="text-align:left;"> 24,930 </td>
-   <td style="text-align:left;"> 26,393 </td>
-   <td style="text-align:left;"> 26,515 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Median UMI Counts per Cell </td>
-   <td style="text-align:left;"> 1,206 </td>
-   <td style="text-align:left;"> 1,246 </td>
-   <td style="text-align:left;"> 1,922 </td>
+   <td style="text-align:left;"> 24,911 </td>
+   <td style="text-align:left;"> 26,299 </td>
+   <td style="text-align:left;"> 26,487 </td>
   </tr>
 </tbody>
 </table>
@@ -338,7 +338,7 @@ experiment.aggregate@assays # a slot is accessed with the @ symbol
 
 ```
 ## $RNA
-## Assay (v5) data with 38606 features for 9520 cells
+## Assay (v5) data with 38606 features for 9107 cells
 ## First 10 features:
 ##  DDX11L2, MIR1302-2HG, FAM138A, ENSG00000290826, OR4F5, ENSG00000238009,
 ## ENSG00000239945, ENSG00000239906, ENSG00000241860, ENSG00000241599 
@@ -414,7 +414,7 @@ saveRDS(experiment.aggregate, file="scRNA_workshop-01.rds")
 #### Download Rmd
 
 ``` r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2024-December-Single-Cell-RNA-Seq-Analysis/main/data_analysis/02-filtering.Rmd", "02-filtering.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/main/data_analysis/02-filtering.Rmd", "02-filtering.Rmd")
 ```
 
 #### Session information
@@ -424,7 +424,7 @@ sessionInfo()
 ```
 
 ```
-## R version 4.4.0 (2024-04-24)
+## R version 4.4.3 (2025-02-28)
 ## Platform: aarch64-apple-darwin20
 ## Running under: macOS Ventura 13.7.1
 ## 
@@ -443,37 +443,37 @@ sessionInfo()
 ## 
 ## other attached packages:
 ## [1] viridis_0.6.5      viridisLite_0.4.2  ggplot2_3.5.1      kableExtra_1.4.0  
-## [5] Seurat_5.1.0       SeuratObject_5.0.2 sp_2.1-4          
+## [5] Seurat_5.2.1       SeuratObject_5.0.2 sp_2.1-4          
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] RColorBrewer_1.1-3     rstudioapi_0.16.0      jsonlite_1.8.8        
-##   [4] magrittr_2.0.3         spatstat.utils_3.0-4   farver_2.1.2          
+##   [4] magrittr_2.0.3         spatstat.utils_3.1-2   farver_2.1.2          
 ##   [7] rmarkdown_2.27         vctrs_0.6.5            ROCR_1.0-11           
 ##  [10] spatstat.explore_3.2-7 htmltools_0.5.8.1      sass_0.4.9            
-##  [13] sctransform_0.4.1      parallelly_1.37.1      KernSmooth_2.23-22    
+##  [13] sctransform_0.4.1      parallelly_1.37.1      KernSmooth_2.23-26    
 ##  [16] bslib_0.7.0            htmlwidgets_1.6.4      ica_1.0-3             
 ##  [19] plyr_1.8.9             plotly_4.10.4          zoo_1.8-12            
 ##  [22] cachem_1.1.0           igraph_2.0.3           mime_0.12             
-##  [25] lifecycle_1.0.4        pkgconfig_2.0.3        Matrix_1.7-0          
+##  [25] lifecycle_1.0.4        pkgconfig_2.0.3        Matrix_1.7-2          
 ##  [28] R6_2.5.1               fastmap_1.2.0          fitdistrplus_1.1-11   
 ##  [31] future_1.33.2          shiny_1.8.1.1          digest_0.6.35         
 ##  [34] colorspace_2.1-0       patchwork_1.2.0        tensor_1.5            
 ##  [37] RSpectra_0.16-1        irlba_2.3.5.1          labeling_0.4.3        
 ##  [40] progressr_0.14.0       fansi_1.0.6            spatstat.sparse_3.0-3 
 ##  [43] httr_1.4.7             polyclip_1.10-6        abind_1.4-5           
-##  [46] compiler_4.4.0         bit64_4.0.5            withr_3.0.0           
-##  [49] fastDummies_1.7.3      highr_0.11             MASS_7.3-60.2         
-##  [52] tools_4.4.0            lmtest_0.9-40          httpuv_1.6.15         
+##  [46] compiler_4.4.3         bit64_4.0.5            withr_3.0.0           
+##  [49] fastDummies_1.7.3      highr_0.11             MASS_7.3-64           
+##  [52] tools_4.4.3            lmtest_0.9-40          httpuv_1.6.15         
 ##  [55] future.apply_1.11.2    goftest_1.2-3          glue_1.7.0            
-##  [58] nlme_3.1-164           promises_1.3.0         grid_4.4.0            
-##  [61] Rtsne_0.17             cluster_2.1.6          reshape2_1.4.4        
+##  [58] nlme_3.1-167           promises_1.3.0         grid_4.4.3            
+##  [61] Rtsne_0.17             cluster_2.1.8          reshape2_1.4.4        
 ##  [64] generics_0.1.3         hdf5r_1.3.10           gtable_0.3.5          
 ##  [67] spatstat.data_3.0-4    tidyr_1.3.1            data.table_1.15.4     
 ##  [70] xml2_1.3.6             utf8_1.2.4             spatstat.geom_3.2-9   
 ##  [73] RcppAnnoy_0.0.22       ggrepel_0.9.5          RANN_2.6.1            
 ##  [76] pillar_1.9.0           stringr_1.5.1          spam_2.10-0           
-##  [79] RcppHNSW_0.6.0         later_1.3.2            splines_4.4.0         
-##  [82] dplyr_1.1.4            lattice_0.22-6         survival_3.5-8        
+##  [79] RcppHNSW_0.6.0         later_1.3.2            splines_4.4.3         
+##  [82] dplyr_1.1.4            lattice_0.22-6         survival_3.8-3        
 ##  [85] bit_4.0.5              deldir_2.0-4           tidyselect_1.2.1      
 ##  [88] miniUI_0.1.1.1         pbapply_1.7-2          knitr_1.47            
 ##  [91] gridExtra_2.3          svglite_2.1.3          scattermore_1.2       
@@ -483,8 +483,7 @@ sessionInfo()
 ## [103] uwot_0.2.2             xtable_1.8-4           reticulate_1.39.0     
 ## [106] systemfonts_1.1.0      munsell_0.5.1          jquerylib_0.1.4       
 ## [109] Rcpp_1.0.12            globals_0.16.3         spatstat.random_3.2-3 
-## [112] png_0.1-8              parallel_4.4.0         dotCall64_1.1-1       
+## [112] png_0.1-8              parallel_4.4.3         dotCall64_1.1-1       
 ## [115] listenv_0.9.1          scales_1.3.0           ggridges_0.5.6        
-## [118] leiden_0.4.3.1         purrr_1.0.2            rlang_1.1.3           
-## [121] cowplot_1.1.3
+## [118] purrr_1.0.2            rlang_1.1.3            cowplot_1.1.3
 ```

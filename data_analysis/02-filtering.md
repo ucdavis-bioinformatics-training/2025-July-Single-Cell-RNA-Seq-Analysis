@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Single Cell RNA-Seq Part 2: QA and filtering"
 author: "UCD Bioinformatics Core"
-date: "2024-11-25"
+date: "2025-07-01"
 output:
     html_document:
       keep_md: TRUE
@@ -30,7 +30,7 @@ experiment.aggregate
 
 ```
 ## An object of class Seurat 
-## 38606 features across 9520 samples within 1 assay 
+## 38606 features across 9107 samples within 1 assay 
 ## Active assay: RNA (38606 features, 0 variable features)
 ##  1 layer present: counts
 ```
@@ -53,7 +53,7 @@ summary(experiment.aggregate$percent_MT)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.2790  0.5581  0.8236  1.0796 14.1631
+##  0.0000  0.2710  0.5352  0.7779  1.0188 13.3568
 ```
 
 In this workshop, we are using the filtered feature barcode matrix. While this lowers the likelihood of encountering barcodes that are not cell-associated within our expression matrix, it is still good practice to perform quality assurance on the experiment.
@@ -82,67 +82,67 @@ kable(do.call("cbind", tapply(experiment.aggregate$nFeature_RNA,
   <tr>
    <td style="text-align:left;"> 0% </td>
    <td style="text-align:right;"> 398.0 </td>
-   <td style="text-align:right;"> 405.0 </td>
-   <td style="text-align:right;"> 412.0 </td>
+   <td style="text-align:right;"> 405 </td>
+   <td style="text-align:right;"> 427.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10% </td>
-   <td style="text-align:right;"> 495.0 </td>
-   <td style="text-align:right;"> 507.0 </td>
-   <td style="text-align:right;"> 577.0 </td>
+   <td style="text-align:right;"> 505.0 </td>
+   <td style="text-align:right;"> 519 </td>
+   <td style="text-align:right;"> 606.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 20% </td>
-   <td style="text-align:right;"> 574.4 </td>
-   <td style="text-align:right;"> 585.0 </td>
-   <td style="text-align:right;"> 732.0 </td>
+   <td style="text-align:right;"> 596.4 </td>
+   <td style="text-align:right;"> 609 </td>
+   <td style="text-align:right;"> 770.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 30% </td>
-   <td style="text-align:right;"> 680.0 </td>
-   <td style="text-align:right;"> 680.9 </td>
-   <td style="text-align:right;"> 911.0 </td>
+   <td style="text-align:right;"> 694.6 </td>
+   <td style="text-align:right;"> 721 </td>
+   <td style="text-align:right;"> 946.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 40% </td>
-   <td style="text-align:right;"> 789.6 </td>
-   <td style="text-align:right;"> 799.2 </td>
-   <td style="text-align:right;"> 1108.8 </td>
+   <td style="text-align:right;"> 802.0 </td>
+   <td style="text-align:right;"> 857 </td>
+   <td style="text-align:right;"> 1156.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 50% </td>
-   <td style="text-align:right;"> 937.0 </td>
-   <td style="text-align:right;"> 969.5 </td>
-   <td style="text-align:right;"> 1336.0 </td>
+   <td style="text-align:right;"> 962.0 </td>
+   <td style="text-align:right;"> 1017 </td>
+   <td style="text-align:right;"> 1375.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 60% </td>
-   <td style="text-align:right;"> 1133.2 </td>
-   <td style="text-align:right;"> 1137.8 </td>
-   <td style="text-align:right;"> 1578.0 </td>
+   <td style="text-align:right;"> 1159.8 </td>
+   <td style="text-align:right;"> 1189 </td>
+   <td style="text-align:right;"> 1604.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 70% </td>
-   <td style="text-align:right;"> 1388.0 </td>
-   <td style="text-align:right;"> 1374.0 </td>
-   <td style="text-align:right;"> 1827.0 </td>
+   <td style="text-align:right;"> 1418.2 </td>
+   <td style="text-align:right;"> 1427 </td>
+   <td style="text-align:right;"> 1855.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 80% </td>
-   <td style="text-align:right;"> 1813.6 </td>
-   <td style="text-align:right;"> 1742.2 </td>
-   <td style="text-align:right;"> 2139.6 </td>
+   <td style="text-align:right;"> 1842.2 </td>
+   <td style="text-align:right;"> 1799 </td>
+   <td style="text-align:right;"> 2166.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 90% </td>
-   <td style="text-align:right;"> 2614.5 </td>
-   <td style="text-align:right;"> 2372.0 </td>
-   <td style="text-align:right;"> 2604.0 </td>
+   <td style="text-align:right;"> 2648.4 </td>
+   <td style="text-align:right;"> 2437 </td>
+   <td style="text-align:right;"> 2618.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 100% </td>
-   <td style="text-align:right;"> 12352.0 </td>
-   <td style="text-align:right;"> 12362.0 </td>
+   <td style="text-align:right;"> 12359.0 </td>
+   <td style="text-align:right;"> 12362 </td>
    <td style="text-align:right;"> 8966.0 </td>
   </tr>
 </tbody>
@@ -169,67 +169,67 @@ kable(do.call("cbind", tapply(experiment.aggregate$nCount_RNA,
   <tr>
    <td style="text-align:left;"> 0% </td>
    <td style="text-align:right;"> 500.0 </td>
-   <td style="text-align:right;"> 500.0 </td>
+   <td style="text-align:right;"> 500 </td>
    <td style="text-align:right;"> 500.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10% </td>
-   <td style="text-align:right;"> 580.7 </td>
-   <td style="text-align:right;"> 588.0 </td>
-   <td style="text-align:right;"> 693.0 </td>
+   <td style="text-align:right;"> 586.2 </td>
+   <td style="text-align:right;"> 607 </td>
+   <td style="text-align:right;"> 732.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 20% </td>
-   <td style="text-align:right;"> 687.4 </td>
-   <td style="text-align:right;"> 696.6 </td>
-   <td style="text-align:right;"> 904.4 </td>
+   <td style="text-align:right;"> 710.0 </td>
+   <td style="text-align:right;"> 723 </td>
+   <td style="text-align:right;"> 965.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 30% </td>
-   <td style="text-align:right;"> 830.1 </td>
-   <td style="text-align:right;"> 823.0 </td>
-   <td style="text-align:right;"> 1173.0 </td>
+   <td style="text-align:right;"> 849.0 </td>
+   <td style="text-align:right;"> 883 </td>
+   <td style="text-align:right;"> 1239.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 40% </td>
-   <td style="text-align:right;"> 981.8 </td>
-   <td style="text-align:right;"> 1003.0 </td>
-   <td style="text-align:right;"> 1516.0 </td>
+   <td style="text-align:right;"> 1007.4 </td>
+   <td style="text-align:right;"> 1072 </td>
+   <td style="text-align:right;"> 1588.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 50% </td>
-   <td style="text-align:right;"> 1206.0 </td>
-   <td style="text-align:right;"> 1245.5 </td>
-   <td style="text-align:right;"> 1922.5 </td>
+   <td style="text-align:right;"> 1238.0 </td>
+   <td style="text-align:right;"> 1325 </td>
+   <td style="text-align:right;"> 1985.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 60% </td>
-   <td style="text-align:right;"> 1509.2 </td>
-   <td style="text-align:right;"> 1526.8 </td>
-   <td style="text-align:right;"> 2407.0 </td>
+   <td style="text-align:right;"> 1542.2 </td>
+   <td style="text-align:right;"> 1600 </td>
+   <td style="text-align:right;"> 2475.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 70% </td>
-   <td style="text-align:right;"> 1929.8 </td>
-   <td style="text-align:right;"> 1930.0 </td>
-   <td style="text-align:right;"> 2987.9 </td>
+   <td style="text-align:right;"> 1978.2 </td>
+   <td style="text-align:right;"> 2006 </td>
+   <td style="text-align:right;"> 3036.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 80% </td>
-   <td style="text-align:right;"> 2707.6 </td>
-   <td style="text-align:right;"> 2616.0 </td>
-   <td style="text-align:right;"> 3736.2 </td>
+   <td style="text-align:right;"> 2754.6 </td>
+   <td style="text-align:right;"> 2752 </td>
+   <td style="text-align:right;"> 3805.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 90% </td>
-   <td style="text-align:right;"> 4441.8 </td>
-   <td style="text-align:right;"> 4094.2 </td>
-   <td style="text-align:right;"> 5124.4 </td>
+   <td style="text-align:right;"> 4600.2 </td>
+   <td style="text-align:right;"> 4259 </td>
+   <td style="text-align:right;"> 5170.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 100% </td>
-   <td style="text-align:right;"> 152677.0 </td>
-   <td style="text-align:right;"> 150946.0 </td>
+   <td style="text-align:right;"> 152787.0 </td>
+   <td style="text-align:right;"> 150946 </td>
    <td style="text-align:right;"> 90475.0 </td>
   </tr>
 </tbody>
@@ -262,61 +262,61 @@ kable(round(do.call("cbind", tapply(experiment.aggregate$percent_MT,
   </tr>
   <tr>
    <td style="text-align:left;"> 10% </td>
-   <td style="text-align:right;"> 0.263 </td>
-   <td style="text-align:right;"> 0.346 </td>
-   <td style="text-align:right;"> 0.117 </td>
+   <td style="text-align:right;"> 0.260 </td>
+   <td style="text-align:right;"> 0.343 </td>
+   <td style="text-align:right;"> 0.116 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 20% </td>
-   <td style="text-align:right;"> 0.365 </td>
-   <td style="text-align:right;"> 0.505 </td>
-   <td style="text-align:right;"> 0.163 </td>
+   <td style="text-align:right;"> 0.361 </td>
+   <td style="text-align:right;"> 0.491 </td>
+   <td style="text-align:right;"> 0.161 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 30% </td>
-   <td style="text-align:right;"> 0.469 </td>
-   <td style="text-align:right;"> 0.672 </td>
-   <td style="text-align:right;"> 0.210 </td>
+   <td style="text-align:right;"> 0.465 </td>
+   <td style="text-align:right;"> 0.644 </td>
+   <td style="text-align:right;"> 0.206 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 40% </td>
-   <td style="text-align:right;"> 0.576 </td>
-   <td style="text-align:right;"> 0.843 </td>
-   <td style="text-align:right;"> 0.262 </td>
+   <td style="text-align:right;"> 0.567 </td>
+   <td style="text-align:right;"> 0.811 </td>
+   <td style="text-align:right;"> 0.254 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 50% </td>
-   <td style="text-align:right;"> 0.700 </td>
-   <td style="text-align:right;"> 1.032 </td>
-   <td style="text-align:right;"> 0.322 </td>
+   <td style="text-align:right;"> 0.688 </td>
+   <td style="text-align:right;"> 0.986 </td>
+   <td style="text-align:right;"> 0.311 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 60% </td>
-   <td style="text-align:right;"> 0.855 </td>
-   <td style="text-align:right;"> 1.269 </td>
-   <td style="text-align:right;"> 0.403 </td>
+   <td style="text-align:right;"> 0.835 </td>
+   <td style="text-align:right;"> 1.208 </td>
+   <td style="text-align:right;"> 0.389 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 70% </td>
-   <td style="text-align:right;"> 1.057 </td>
-   <td style="text-align:right;"> 1.530 </td>
-   <td style="text-align:right;"> 0.513 </td>
+   <td style="text-align:right;"> 1.026 </td>
+   <td style="text-align:right;"> 1.451 </td>
+   <td style="text-align:right;"> 0.487 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 80% </td>
-   <td style="text-align:right;"> 1.324 </td>
-   <td style="text-align:right;"> 1.900 </td>
-   <td style="text-align:right;"> 0.683 </td>
+   <td style="text-align:right;"> 1.289 </td>
+   <td style="text-align:right;"> 1.795 </td>
+   <td style="text-align:right;"> 0.645 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 90% </td>
-   <td style="text-align:right;"> 1.713 </td>
-   <td style="text-align:right;"> 2.718 </td>
-   <td style="text-align:right;"> 0.949 </td>
+   <td style="text-align:right;"> 1.658 </td>
+   <td style="text-align:right;"> 2.475 </td>
+   <td style="text-align:right;"> 0.902 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 100% </td>
-   <td style="text-align:right;"> 14.163 </td>
+   <td style="text-align:right;"> 10.093 </td>
    <td style="text-align:right;"> 13.357 </td>
    <td style="text-align:right;"> 3.470 </td>
   </tr>
@@ -531,7 +531,7 @@ table(experiment.aggregate$orig.ident)
 ```
 ## 
 ## A001-C-007 A001-C-104 B001-A-301 
-##       1808       3164       4548
+##       1763       2951       4393
 ```
 
 ``` r
@@ -547,7 +547,7 @@ experiment.filter
 
 ```
 ## An object of class Seurat 
-## 38606 features across 6368 samples within 1 assay 
+## 38606 features across 6315 samples within 1 assay 
 ## Active assay: RNA (38606 features, 0 variable features)
 ##  1 layer present: counts
 ```
@@ -559,7 +559,7 @@ table(experiment.filter$orig.ident)
 ```
 ## 
 ## A001-C-007 A001-C-104 B001-A-301 
-##       1038       1880       3450
+##       1037       1848       3430
 ```
 
 ``` r
@@ -617,8 +617,8 @@ experiment.filter
 
 ```
 ## An object of class Seurat 
-## 11475 features across 6368 samples within 1 assay 
-## Active assay: RNA (11475 features, 0 variable features)
+## 11474 features across 6315 samples within 1 assay 
+## Active assay: RNA (11474 features, 0 variable features)
 ##  1 layer present: counts
 ```
 
@@ -637,7 +637,7 @@ saveRDS(experiment.aggregate, file="scRNA_workshop-02.rds")
 #### Download Rmd
 
 ``` r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2024-December-Single-Cell-RNA-Seq-Analysis/main/data_analysis/03-normalize_scale.Rmd", "03-normalize_scale.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/main/data_analysis/03-normalize_scale.Rmd", "03-normalize_scale.Rmd")
 ```
 
 #### Session Information
@@ -647,7 +647,7 @@ sessionInfo()
 ```
 
 ```
-## R version 4.4.0 (2024-04-24)
+## R version 4.4.3 (2025-02-28)
 ## Platform: aarch64-apple-darwin20
 ## Running under: macOS Ventura 13.7.1
 ## 
@@ -665,48 +665,49 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.4.0   tidyr_1.3.1        ggplot2_3.5.1      Seurat_5.1.0      
+## [1] kableExtra_1.4.0   tidyr_1.3.1        ggplot2_3.5.1      Seurat_5.2.1      
 ## [5] SeuratObject_5.0.2 sp_2.1-4          
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] deldir_2.0-4           pbapply_1.7-2          gridExtra_2.3         
-##   [4] rlang_1.1.3            magrittr_2.0.3         RcppAnnoy_0.0.22      
-##   [7] spatstat.geom_3.2-9    matrixStats_1.3.0      ggridges_0.5.6        
-##  [10] compiler_4.4.0         systemfonts_1.1.0      png_0.1-8             
-##  [13] vctrs_0.6.5            reshape2_1.4.4         stringr_1.5.1         
-##  [16] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
-##  [19] utf8_1.2.4             promises_1.3.0         rmarkdown_2.27        
-##  [22] purrr_1.0.2            xfun_0.44              cachem_1.1.0          
-##  [25] jsonlite_1.8.8         goftest_1.2-3          highr_0.11            
-##  [28] later_1.3.2            spatstat.utils_3.0-4   irlba_2.3.5.1         
-##  [31] parallel_4.4.0         cluster_2.1.6          R6_2.5.1              
-##  [34] ica_1.0-3              spatstat.data_3.0-4    bslib_0.7.0           
-##  [37] stringi_1.8.4          RColorBrewer_1.1-3     reticulate_1.39.0     
-##  [40] parallelly_1.37.1      lmtest_0.9-40          jquerylib_0.1.4       
-##  [43] scattermore_1.2        Rcpp_1.0.12            knitr_1.47            
-##  [46] tensor_1.5             future.apply_1.11.2    zoo_1.8-12            
-##  [49] sctransform_0.4.1      httpuv_1.6.15          Matrix_1.7-0          
-##  [52] splines_4.4.0          igraph_2.0.3           tidyselect_1.2.1      
-##  [55] abind_1.4-5            rstudioapi_0.16.0      yaml_2.3.8            
-##  [58] spatstat.random_3.2-3  codetools_0.2-20       miniUI_0.1.1.1        
-##  [61] spatstat.explore_3.2-7 listenv_0.9.1          lattice_0.22-6        
-##  [64] tibble_3.2.1           plyr_1.8.9             withr_3.0.0           
-##  [67] shiny_1.8.1.1          ROCR_1.0-11            evaluate_0.23         
-##  [70] Rtsne_0.17             future_1.33.2          fastDummies_1.7.3     
-##  [73] survival_3.5-8         polyclip_1.10-6        xml2_1.3.6            
-##  [76] fitdistrplus_1.1-11    pillar_1.9.0           KernSmooth_2.23-22    
-##  [79] plotly_4.10.4          generics_0.1.3         RcppHNSW_0.6.0        
-##  [82] munsell_0.5.1          scales_1.3.0           globals_0.16.3        
-##  [85] xtable_1.8-4           glue_1.7.0             lazyeval_0.2.2        
-##  [88] tools_4.4.0            data.table_1.15.4      RSpectra_0.16-1       
-##  [91] RANN_2.6.1             leiden_0.4.3.1         dotCall64_1.1-1       
-##  [94] cowplot_1.1.3          grid_4.4.0             colorspace_2.1-0      
-##  [97] nlme_3.1-164           patchwork_1.2.0        cli_3.6.2             
-## [100] spatstat.sparse_3.0-3  spam_2.10-0            fansi_1.0.6           
-## [103] viridisLite_0.4.2      svglite_2.1.3          dplyr_1.1.4           
-## [106] uwot_0.2.2             gtable_0.3.5           sass_0.4.9            
-## [109] digest_0.6.35          progressr_0.14.0       ggrepel_0.9.5         
-## [112] farver_2.1.2           htmlwidgets_1.6.4      htmltools_0.5.8.1     
-## [115] lifecycle_1.0.4        httr_1.4.7             mime_0.12             
-## [118] MASS_7.3-60.2
+##   [1] RColorBrewer_1.1-3     rstudioapi_0.16.0      jsonlite_1.8.8        
+##   [4] magrittr_2.0.3         spatstat.utils_3.1-2   ggbeeswarm_0.7.2      
+##   [7] farver_2.1.2           rmarkdown_2.27         vctrs_0.6.5           
+##  [10] ROCR_1.0-11            spatstat.explore_3.2-7 htmltools_0.5.8.1     
+##  [13] sass_0.4.9             sctransform_0.4.1      parallelly_1.37.1     
+##  [16] KernSmooth_2.23-26     bslib_0.7.0            htmlwidgets_1.6.4     
+##  [19] ica_1.0-3              plyr_1.8.9             plotly_4.10.4         
+##  [22] zoo_1.8-12             cachem_1.1.0           igraph_2.0.3          
+##  [25] mime_0.12              lifecycle_1.0.4        pkgconfig_2.0.3       
+##  [28] Matrix_1.7-2           R6_2.5.1               fastmap_1.2.0         
+##  [31] fitdistrplus_1.1-11    future_1.33.2          shiny_1.8.1.1         
+##  [34] digest_0.6.35          colorspace_2.1-0       patchwork_1.2.0       
+##  [37] tensor_1.5             RSpectra_0.16-1        irlba_2.3.5.1         
+##  [40] labeling_0.4.3         progressr_0.14.0       fansi_1.0.6           
+##  [43] spatstat.sparse_3.0-3  httr_1.4.7             polyclip_1.10-6       
+##  [46] abind_1.4-5            compiler_4.4.3         withr_3.0.0           
+##  [49] fastDummies_1.7.3      highr_0.11             MASS_7.3-64           
+##  [52] tools_4.4.3            vipor_0.4.7            lmtest_0.9-40         
+##  [55] beeswarm_0.4.0         httpuv_1.6.15          future.apply_1.11.2   
+##  [58] goftest_1.2-3          glue_1.7.0             nlme_3.1-167          
+##  [61] promises_1.3.0         grid_4.4.3             Rtsne_0.17            
+##  [64] cluster_2.1.8          reshape2_1.4.4         generics_0.1.3        
+##  [67] gtable_0.3.5           spatstat.data_3.0-4    data.table_1.15.4     
+##  [70] xml2_1.3.6             utf8_1.2.4             spatstat.geom_3.2-9   
+##  [73] RcppAnnoy_0.0.22       ggrepel_0.9.5          RANN_2.6.1            
+##  [76] pillar_1.9.0           stringr_1.5.1          spam_2.10-0           
+##  [79] RcppHNSW_0.6.0         later_1.3.2            splines_4.4.3         
+##  [82] dplyr_1.1.4            lattice_0.22-6         survival_3.8-3        
+##  [85] deldir_2.0-4           tidyselect_1.2.1       miniUI_0.1.1.1        
+##  [88] pbapply_1.7-2          knitr_1.47             gridExtra_2.3         
+##  [91] svglite_2.1.3          scattermore_1.2        xfun_0.44             
+##  [94] matrixStats_1.3.0      stringi_1.8.4          lazyeval_0.2.2        
+##  [97] yaml_2.3.8             evaluate_0.23          codetools_0.2-20      
+## [100] tibble_3.2.1           cli_3.6.2              uwot_0.2.2            
+## [103] xtable_1.8-4           reticulate_1.39.0      systemfonts_1.1.0     
+## [106] munsell_0.5.1          jquerylib_0.1.4        Rcpp_1.0.12           
+## [109] globals_0.16.3         spatstat.random_3.2-3  png_0.1-8             
+## [112] ggrastr_1.0.2          parallel_4.4.3         dotCall64_1.1-1       
+## [115] listenv_0.9.1          viridisLite_0.4.2      scales_1.3.0          
+## [118] ggridges_0.5.6         purrr_1.0.2            rlang_1.1.3           
+## [121] cowplot_1.1.3
 ```
