@@ -142,7 +142,7 @@ Let's launch the cellranger job, and then take a moment to walk through what the
 2. Add Cell Ranger to your path, and review cellranger's sub-applications and help docs
 
     ```bash
-		module load cellranger/8.0.1
+		export PATH=/share/workshop/scRNA_workshop/Software/cellranger-9.0.1/bin/:$PATH
 		cellranger --help
 		cellranger count --help
     ```
@@ -377,7 +377,7 @@ A summary of the alignment and assignment of reads to cells and genes is present
 
 Cell Ranger also produces a more readable HTML report with the same statistics and some "analysis".
 
-[Cell Ranger V8 web summary](web_summary.html)
+[Cell Ranger V9 web summary](web_summary.html)
 
 ## Exercises
 
