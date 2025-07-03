@@ -21,8 +21,8 @@ experiment.aggregate
 
 ```
 ## An object of class Seurat 
-## 11475 features across 6368 samples within 1 assay 
-## Active assay: RNA (11475 features, 0 variable features)
+## 11474 features across 6315 samples within 1 assay 
+## Active assay: RNA (11474 features, 0 variable features)
 ##  1 layer present: counts
 ```
 
@@ -31,7 +31,7 @@ set.seed(12345)
 ```
 
 ## Normalize the data
-After filtering, the next step is to normalize the data. We employ a global-scaling normalization method, LogNormalize, that normalizes the gene expression measurements for each cell by the total expression, multiplies this by a scale factor (10,000 by default), and then log-transforms the data.
+At the end of filtering step, the data should be at good quality for analysis. The next step is to normalize the data. We employ a global-scaling normalization method, LogNormalize, that normalizes the gene expression measurements for each cell by the total expression, multiplies this by a scale factor (10,000 by default), and then log-transforms the data.
 
 ``` r
 ?NormalizeData
@@ -109,15 +109,15 @@ table(experiment.aggregate@meta.data$Phase) %>%
 <tbody>
   <tr>
    <td style="text-align:center;"> G1 </td>
-   <td style="text-align:center;"> 3810 </td>
+   <td style="text-align:center;"> 3803 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> G2M </td>
-   <td style="text-align:center;"> 1187 </td>
+   <td style="text-align:center;"> 1169 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> S </td>
-   <td style="text-align:center;"> 1371 </td>
+   <td style="text-align:center;"> 1343 </td>
   </tr>
 </tbody>
 </table>
@@ -131,7 +131,7 @@ table(Idents(experiment.aggregate))
 ```
 ## 
 ##    S  G2M   G1 
-## 1371 1187 3810
+## 1343 1169 3803
 ```
 
 ``` r
@@ -142,7 +142,7 @@ table(Idents(experiment.aggregate))
 ```
 ## 
 ## A001-C-007 A001-C-104 B001-A-301 
-##       1038       1880       3450
+##       1037       1848       3430
 ```
 
 ## Identify variable genes
@@ -197,7 +197,7 @@ length(genes.use)
 ```
 
 ```
-## [1] 7112
+## [1] 7110
 ```
 
 ``` r
@@ -223,7 +223,7 @@ saveRDS(experiment.aggregate, file = "scRNA_workshop-03.rds")
 #### Download Rmd
 
 ``` r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2024-December-Single-Cell-RNA-Seq-Analysis/main/data_analysis/04-dimensionality_reduction.Rmd", "04-dimensionality_reduction.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/main/data_analysis/04-dimensionality_reduction.Rmd", "04-dimensionality_reduction.Rmd")
 ```
 
 #### Session Information
@@ -233,7 +233,7 @@ sessionInfo()
 ```
 
 ```
-## R version 4.4.0 (2024-04-24)
+## R version 4.4.3 (2025-02-28)
 ## Platform: aarch64-apple-darwin20
 ## Running under: macOS Ventura 13.7.1
 ## 
@@ -251,47 +251,47 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.4.0   Seurat_5.1.0       SeuratObject_5.0.2 sp_2.1-4          
+## [1] kableExtra_1.4.0   Seurat_5.2.1       SeuratObject_5.0.2 sp_2.1-4          
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] deldir_2.0-4           pbapply_1.7-2          gridExtra_2.3         
 ##   [4] rlang_1.1.3            magrittr_2.0.3         RcppAnnoy_0.0.22      
 ##   [7] spatstat.geom_3.2-9    matrixStats_1.3.0      ggridges_0.5.6        
-##  [10] compiler_4.4.0         systemfonts_1.1.0      png_0.1-8             
+##  [10] compiler_4.4.3         systemfonts_1.1.0      png_0.1-8             
 ##  [13] vctrs_0.6.5            reshape2_1.4.4         stringr_1.5.1         
 ##  [16] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
 ##  [19] utf8_1.2.4             promises_1.3.0         rmarkdown_2.27        
 ##  [22] purrr_1.0.2            xfun_0.44              cachem_1.1.0          
 ##  [25] jsonlite_1.8.8         goftest_1.2-3          highr_0.11            
-##  [28] later_1.3.2            spatstat.utils_3.0-4   irlba_2.3.5.1         
-##  [31] parallel_4.4.0         cluster_2.1.6          R6_2.5.1              
-##  [34] ica_1.0-3              spatstat.data_3.0-4    bslib_0.7.0           
-##  [37] stringi_1.8.4          RColorBrewer_1.1-3     reticulate_1.39.0     
+##  [28] later_1.3.2            spatstat.utils_3.1-2   irlba_2.3.5.1         
+##  [31] parallel_4.4.3         cluster_2.1.8          R6_2.5.1              
+##  [34] ica_1.0-3              bslib_0.7.0            stringi_1.8.4         
+##  [37] RColorBrewer_1.1-3     spatstat.data_3.0-4    reticulate_1.39.0     
 ##  [40] parallelly_1.37.1      lmtest_0.9-40          jquerylib_0.1.4       
 ##  [43] scattermore_1.2        Rcpp_1.0.12            knitr_1.47            
 ##  [46] tensor_1.5             future.apply_1.11.2    zoo_1.8-12            
-##  [49] sctransform_0.4.1      httpuv_1.6.15          Matrix_1.7-0          
-##  [52] splines_4.4.0          igraph_2.0.3           tidyselect_1.2.1      
+##  [49] sctransform_0.4.1      httpuv_1.6.15          Matrix_1.7-2          
+##  [52] splines_4.4.3          igraph_2.0.3           tidyselect_1.2.1      
 ##  [55] abind_1.4-5            rstudioapi_0.16.0      yaml_2.3.8            
 ##  [58] spatstat.random_3.2-3  codetools_0.2-20       miniUI_0.1.1.1        
 ##  [61] spatstat.explore_3.2-7 listenv_0.9.1          lattice_0.22-6        
 ##  [64] tibble_3.2.1           plyr_1.8.9             withr_3.0.0           
 ##  [67] shiny_1.8.1.1          ROCR_1.0-11            evaluate_0.23         
 ##  [70] Rtsne_0.17             future_1.33.2          fastDummies_1.7.3     
-##  [73] survival_3.5-8         polyclip_1.10-6        xml2_1.3.6            
-##  [76] fitdistrplus_1.1-11    pillar_1.9.0           KernSmooth_2.23-22    
+##  [73] survival_3.8-3         polyclip_1.10-6        xml2_1.3.6            
+##  [76] fitdistrplus_1.1-11    pillar_1.9.0           KernSmooth_2.23-26    
 ##  [79] plotly_4.10.4          generics_0.1.3         RcppHNSW_0.6.0        
 ##  [82] ggplot2_3.5.1          munsell_0.5.1          scales_1.3.0          
 ##  [85] globals_0.16.3         xtable_1.8-4           glue_1.7.0            
-##  [88] lazyeval_0.2.2         tools_4.4.0            data.table_1.15.4     
-##  [91] RSpectra_0.16-1        RANN_2.6.1             leiden_0.4.3.1        
-##  [94] dotCall64_1.1-1        cowplot_1.1.3          grid_4.4.0            
-##  [97] tidyr_1.3.1            colorspace_2.1-0       nlme_3.1-164          
-## [100] patchwork_1.2.0        cli_3.6.2              spatstat.sparse_3.0-3 
-## [103] spam_2.10-0            fansi_1.0.6            viridisLite_0.4.2     
-## [106] svglite_2.1.3          dplyr_1.1.4            uwot_0.2.2            
-## [109] gtable_0.3.5           sass_0.4.9             digest_0.6.35         
-## [112] progressr_0.14.0       ggrepel_0.9.5          farver_2.1.2          
-## [115] htmlwidgets_1.6.4      htmltools_0.5.8.1      lifecycle_1.0.4       
-## [118] httr_1.4.7             mime_0.12              MASS_7.3-60.2
+##  [88] lazyeval_0.2.2         tools_4.4.3            data.table_1.15.4     
+##  [91] RSpectra_0.16-1        RANN_2.6.1             dotCall64_1.1-1       
+##  [94] cowplot_1.1.3          grid_4.4.3             tidyr_1.3.1           
+##  [97] colorspace_2.1-0       nlme_3.1-167           patchwork_1.2.0       
+## [100] cli_3.6.2              spatstat.sparse_3.0-3  spam_2.10-0           
+## [103] fansi_1.0.6            viridisLite_0.4.2      svglite_2.1.3         
+## [106] dplyr_1.1.4            uwot_0.2.2             gtable_0.3.5          
+## [109] sass_0.4.9             digest_0.6.35          progressr_0.14.0      
+## [112] ggrepel_0.9.5          farver_2.1.2           htmlwidgets_1.6.4     
+## [115] htmltools_0.5.8.1      lifecycle_1.0.4        httr_1.4.7            
+## [118] mime_0.12              MASS_7.3-64
 ```
