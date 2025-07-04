@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Single Cell RNA-Seq Part 8: Integration"
 author: "UCD Bioinformatics Core"
-date: "2024-06-06"
+date: "2025-07-04"
 output:
     html_document:
       keep_md: TRUE
@@ -177,39 +177,39 @@ experiment.integrated <- FindClusters(experiment.integrated,
 ```
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 274204
+## Number of nodes: 6315
+## Number of edges: 271793
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.9799
+## Maximum modularity in 10 random starts: 0.9787
 ## Number of communities: 10
 ## Elapsed time: 0 seconds
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 274204
+## Number of nodes: 6315
+## Number of edges: 271793
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.9774
+## Maximum modularity in 10 random starts: 0.9761
 ## Number of communities: 10
 ## Elapsed time: 0 seconds
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 274204
+## Number of nodes: 6315
+## Number of edges: 271793
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.9749
-## Number of communities: 11
+## Maximum modularity in 10 random starts: 0.9736
+## Number of communities: 10
 ## Elapsed time: 0 seconds
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 274204
+## Number of nodes: 6315
+## Number of edges: 271793
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.9724
-## Number of communities: 11
+## Maximum modularity in 10 random starts: 0.9710
+## Number of communities: 10
 ## Elapsed time: 0 seconds
 ```
 
@@ -222,9 +222,9 @@ sapply(cluster.resolutions, function(res){
 
 ```
 ## integrated_snn_res.0.04 integrated_snn_res.0.05 integrated_snn_res.0.06 
-##                      10                      10                      11 
+##                      10                      10                      10 
 ## integrated_snn_res.0.07 
-##                      11
+##                      10
 ```
 
 ``` r
@@ -378,9 +378,9 @@ sessionInfo()
 ```
 
 ```
-## R version 4.4.0 (2024-04-24)
+## R version 4.4.3 (2025-02-28)
 ## Platform: aarch64-apple-darwin20
-## Running under: macOS Ventura 13.5.2
+## Running under: macOS Ventura 13.7.1
 ## 
 ## Matrix products: default
 ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
@@ -396,46 +396,47 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_3.5.1      Seurat_5.1.0       SeuratObject_5.0.2 sp_2.1-4          
+## [1] ggplot2_3.5.1      Seurat_5.2.1       SeuratObject_5.0.2 sp_2.1-4          
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] deldir_2.0-4           pbapply_1.7-2          gridExtra_2.3         
 ##   [4] rlang_1.1.3            magrittr_2.0.3         RcppAnnoy_0.0.22      
 ##   [7] spatstat.geom_3.2-9    matrixStats_1.3.0      ggridges_0.5.6        
-##  [10] compiler_4.4.0         png_0.1-8              vctrs_0.6.5           
+##  [10] compiler_4.4.3         png_0.1-8              vctrs_0.6.5           
 ##  [13] reshape2_1.4.4         stringr_1.5.1          pkgconfig_2.0.3       
 ##  [16] fastmap_1.2.0          labeling_0.4.3         utf8_1.2.4            
-##  [19] promises_1.3.0         rmarkdown_2.27         purrr_1.0.2           
-##  [22] xfun_0.44              cachem_1.1.0           jsonlite_1.8.8        
-##  [25] goftest_1.2-3          highr_0.11             later_1.3.2           
-##  [28] spatstat.utils_3.0-4   irlba_2.3.5.1          parallel_4.4.0        
-##  [31] cluster_2.1.6          R6_2.5.1               ica_1.0-3             
-##  [34] spatstat.data_3.0-4    bslib_0.7.0            stringi_1.8.4         
-##  [37] RColorBrewer_1.1-3     reticulate_1.37.0      parallelly_1.37.1     
-##  [40] lmtest_0.9-40          jquerylib_0.1.4        scattermore_1.2       
-##  [43] Rcpp_1.0.12            knitr_1.47             tensor_1.5            
-##  [46] future.apply_1.11.2    zoo_1.8-12             sctransform_0.4.1     
-##  [49] httpuv_1.6.15          Matrix_1.7-0           splines_4.4.0         
-##  [52] igraph_2.0.3           tidyselect_1.2.1       abind_1.4-5           
-##  [55] rstudioapi_0.16.0      yaml_2.3.8             spatstat.random_3.2-3 
-##  [58] codetools_0.2-20       miniUI_0.1.1.1         spatstat.explore_3.2-7
-##  [61] listenv_0.9.1          lattice_0.22-6         tibble_3.2.1          
-##  [64] plyr_1.8.9             withr_3.0.0            shiny_1.8.1.1         
-##  [67] ROCR_1.0-11            evaluate_0.23          Rtsne_0.17            
-##  [70] future_1.33.2          fastDummies_1.7.3      survival_3.5-8        
-##  [73] polyclip_1.10-6        fitdistrplus_1.1-11    pillar_1.9.0          
-##  [76] KernSmooth_2.23-22     plotly_4.10.4          generics_0.1.3        
-##  [79] RcppHNSW_0.6.0         munsell_0.5.1          scales_1.3.0          
-##  [82] globals_0.16.3         xtable_1.8-4           glue_1.7.0            
-##  [85] lazyeval_0.2.2         tools_4.4.0            data.table_1.15.4     
-##  [88] RSpectra_0.16-1        RANN_2.6.1             leiden_0.4.3.1        
-##  [91] dotCall64_1.1-1        cowplot_1.1.3          grid_4.4.0            
-##  [94] ape_5.8                tidyr_1.3.1            colorspace_2.1-0      
-##  [97] nlme_3.1-164           patchwork_1.2.0        cli_3.6.2             
-## [100] spatstat.sparse_3.0-3  spam_2.10-0            fansi_1.0.6           
-## [103] viridisLite_0.4.2      dplyr_1.1.4            uwot_0.2.2            
-## [106] gtable_0.3.5           sass_0.4.9             digest_0.6.35         
-## [109] progressr_0.14.0       ggrepel_0.9.5          farver_2.1.2          
-## [112] htmlwidgets_1.6.4      htmltools_0.5.8.1      lifecycle_1.0.4       
-## [115] httr_1.4.7             mime_0.12              MASS_7.3-60.2
+##  [19] promises_1.3.0         rmarkdown_2.27         ggbeeswarm_0.7.2      
+##  [22] purrr_1.0.2            xfun_0.44              cachem_1.1.0          
+##  [25] jsonlite_1.8.8         goftest_1.2-3          highr_0.11            
+##  [28] later_1.3.2            spatstat.utils_3.1-2   irlba_2.3.5.1         
+##  [31] parallel_4.4.3         cluster_2.1.8          R6_2.5.1              
+##  [34] ica_1.0-3              bslib_0.7.0            stringi_1.8.4         
+##  [37] RColorBrewer_1.1-3     spatstat.data_3.0-4    reticulate_1.39.0     
+##  [40] parallelly_1.37.1      lmtest_0.9-40          jquerylib_0.1.4       
+##  [43] scattermore_1.2        Rcpp_1.0.12            knitr_1.47            
+##  [46] tensor_1.5             future.apply_1.11.2    zoo_1.8-12            
+##  [49] sctransform_0.4.1      httpuv_1.6.15          Matrix_1.7-2          
+##  [52] splines_4.4.3          igraph_2.0.3           tidyselect_1.2.1      
+##  [55] abind_1.4-5            rstudioapi_0.16.0      yaml_2.3.8            
+##  [58] spatstat.random_3.2-3  codetools_0.2-20       miniUI_0.1.1.1        
+##  [61] spatstat.explore_3.2-7 listenv_0.9.1          lattice_0.22-6        
+##  [64] tibble_3.2.1           plyr_1.8.9             withr_3.0.0           
+##  [67] shiny_1.8.1.1          ROCR_1.0-11            ggrastr_1.0.2         
+##  [70] evaluate_0.23          Rtsne_0.17             future_1.33.2         
+##  [73] fastDummies_1.7.3      survival_3.8-3         polyclip_1.10-6       
+##  [76] fitdistrplus_1.1-11    pillar_1.9.0           KernSmooth_2.23-26    
+##  [79] plotly_4.10.4          generics_0.1.3         RcppHNSW_0.6.0        
+##  [82] munsell_0.5.1          scales_1.3.0           globals_0.16.3        
+##  [85] xtable_1.8-4           glue_1.7.0             lazyeval_0.2.2        
+##  [88] tools_4.4.3            data.table_1.15.4      RSpectra_0.16-1       
+##  [91] RANN_2.6.1             dotCall64_1.1-1        cowplot_1.1.3         
+##  [94] grid_4.4.3             ape_5.8                tidyr_1.3.1           
+##  [97] colorspace_2.1-0       nlme_3.1-167           patchwork_1.2.0       
+## [100] beeswarm_0.4.0         vipor_0.4.7            cli_3.6.2             
+## [103] spatstat.sparse_3.0-3  spam_2.10-0            fansi_1.0.6           
+## [106] viridisLite_0.4.2      dplyr_1.1.4            uwot_0.2.2            
+## [109] gtable_0.3.5           sass_0.4.9             digest_0.6.35         
+## [112] progressr_0.14.0       ggrepel_0.9.5          farver_2.1.2          
+## [115] htmlwidgets_1.6.4      htmltools_0.5.8.1      lifecycle_1.0.4       
+## [118] httr_1.4.7             mime_0.12              MASS_7.3-64
 ```

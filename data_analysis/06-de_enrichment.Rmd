@@ -127,7 +127,7 @@ A tutorial on using limma for bulk RNASeq is available [here](https://ucdavis-bi
 
 #### Download Rmd document
 ```{r download_Rmd, eval=TRUE}
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2024-December-Single-Cell-RNA-Seq-Analysis/main/data_analysis/07-doublet_detection.Rmd", "07-doublet_detection.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/main/data_analysis/07-doublet_detection.Rmd", "07-doublet_detection.Rmd")
 ```
 
 #### Session Information
