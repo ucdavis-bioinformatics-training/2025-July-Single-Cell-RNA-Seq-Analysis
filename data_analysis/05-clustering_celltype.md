@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Single Cell RNA-Seq Part 6: Clustering and cell type assignment"
 author: "UCD Bioinformatics Core"
-date: "2024-12-02"
+date: "2025-07-04"
 output:
     html_document:
       keep_md: TRUE
@@ -29,8 +29,8 @@ experiment.aggregate
 
 ```
 ## An object of class Seurat 
-## 11475 features across 6368 samples within 1 assay 
-## Active assay: RNA (11475 features, 7112 variable features)
+## 11474 features across 6315 samples within 1 assay 
+## Active assay: RNA (11474 features, 7110 variable features)
 ##  3 layers present: counts, data, scale.data
 ##  2 dimensional reductions calculated: pca, umap
 ```
@@ -57,17 +57,17 @@ experiment.aggregate <- FindClusters(experiment.aggregate,
 ```
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 261294
+## Number of nodes: 6315
+## Number of edges: 259289
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.9687
+## Maximum modularity in 10 random starts: 0.9690
 ## Number of communities: 10
 ## Elapsed time: 0 seconds
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 261294
+## Number of nodes: 6315
+## Number of edges: 259289
 ## 
 ## Running Louvain algorithm...
 ## Maximum modularity in 10 random starts: 0.9494
@@ -75,21 +75,21 @@ experiment.aggregate <- FindClusters(experiment.aggregate,
 ## Elapsed time: 0 seconds
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 261294
+## Number of nodes: 6315
+## Number of edges: 259289
 ## 
 ## Running Louvain algorithm...
 ## Maximum modularity in 10 random starts: 0.9343
-## Number of communities: 15
+## Number of communities: 14
 ## Elapsed time: 0 seconds
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 6368
-## Number of edges: 261294
+## Number of nodes: 6315
+## Number of edges: 259289
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.9220
-## Number of communities: 15
+## Maximum modularity in 10 random starts: 0.9224
+## Number of communities: 17
 ## Elapsed time: 0 seconds
 ```
 
@@ -118,21 +118,21 @@ head(experiment.aggregate@meta.data[,cluster.resolutions]) %>%
    <td style="text-align:left;"> AAACCCAAGTTATGGA_A001-C-007 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 10 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AAACGCTTCTCTGCTG_A001-C-007 </td>
    <td style="text-align:left;"> 6 </td>
    <td style="text-align:left;"> 7 </td>
-   <td style="text-align:left;"> 10 </td>
-   <td style="text-align:left;"> 10 </td>
+   <td style="text-align:left;"> 9 </td>
+   <td style="text-align:left;"> 13 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AAAGAACGTGCTTATG_A001-C-007 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:left;"> 4 </td>
    <td style="text-align:left;"> 5 </td>
   </tr>
   <tr>
@@ -170,7 +170,7 @@ sapply(cluster.resolutions, function(res){
 
 ```
 ## RNA_snn_res.0.1 RNA_snn_res.0.2 RNA_snn_res.0.3 RNA_snn_res.0.4 
-##              10              11              15              15
+##              10              11              14              17
 ```
 
 ### Visualize clustering
@@ -336,16 +336,15 @@ In many experiments, the clustering resolution does not need to be uniform acros
 
 ``` r
 experiment.aggregate <- RenameIdents(experiment.aggregate,
-                                     '11' = '10',
-                                     '12' = '13')
+                                     '4' = '0')
 experiment.aggregate$res.0.4_merged <- Idents(experiment.aggregate)
 table(experiment.aggregate$res.0.4_merged)
 ```
 
 ```
 ## 
-##   10   13    0    1    2    3    4    5    6    7    8    9   14 
-##  159   86 1417  928  877  661  608  599  415  219  192  182   25
+##    0    1    2    3    5    6    7    8    9   10   11   12   13   14   15   16 
+## 1944  875  764  658  574  399  222  193  180  154  100   79   60   51   37   25
 ```
 
 ``` r
@@ -385,7 +384,8 @@ levels(experiment.aggregate$res.0.4_merged)
 ```
 
 ```
-##  [1] "10" "13" "0"  "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "14"
+##  [1] "0"  "1"  "2"  "3"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15"
+## [16] "16"
 ```
 
 ``` r
@@ -395,7 +395,8 @@ levels(experiment.aggregate$res.0.4_merged)
 ```
 
 ```
-##  [1] "0"  "10" "13" "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "14"
+##  [1] "0"  "1"  "2"  "3"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15"
+## [16] "16"
 ```
 
 ``` r
@@ -417,7 +418,8 @@ levels(experiment.aggregate$res.0.4_merged)
 ```
 
 ```
-##  [1] "0"  "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "13" "14"
+##  [1] "0"  "1"  "2"  "3"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15"
+## [16] "16"
 ```
 
 ``` r
@@ -443,20 +445,20 @@ experiment.aggregate <- FindSubCluster(experiment.aggregate,
 ```
 ## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 ## 
-## Number of nodes: 599
-## Number of edges: 24112
+## Number of nodes: 574
+## Number of edges: 23790
 ## 
 ## Running Louvain algorithm...
-## Maximum modularity in 10 random starts: 0.7177
+## Maximum modularity in 10 random starts: 0.7231
 ## Number of communities: 4
 ## Elapsed time: 0 seconds
 ```
 
 ``` r
 experiment.aggregate$subcluster <- factor(experiment.aggregate$subcluster,
-                                          levels = c(as.character(0:4),
+                                          levels = c(as.character(0:3),
                                                      "5_0", "5_1", "5_2", "5_3",
-                                                     as.character(c(6:10, 13, 14))))
+                                                     as.character(6:16)))
 DimPlot(experiment.aggregate,
         reduction = "umap",
         group.by = "subcluster",
@@ -471,8 +473,8 @@ sort(unique(experiment.aggregate$subcluster))
 ```
 
 ```
-##  [1] 0   1   2   3   4   5_0 5_1 5_2 5_3 6   7   8   9   10  13  14 
-## Levels: 0 1 2 3 4 5_0 5_1 5_2 5_3 6 7 8 9 10 13 14
+##  [1] 0   1   2   3   5_0 5_1 5_2 5_3 6   7   8   9   10  11  12  13  14  15  16 
+## Levels: 0 1 2 3 5_0 5_1 5_2 5_3 6 7 8 9 10 11 12 13 14 15 16
 ```
 
 ## Subset experiment by cluster identity
@@ -524,7 +526,7 @@ length(which(markers$p_val_adj < 0.05)) # how many are significant?
 ```
 
 ```
-## [1] 2617
+## [1] 3023
 ```
 
 ``` r
@@ -546,51 +548,51 @@ head(markers) %>%
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> KCNMA1 </td>
+   <td style="text-align:left;"> CEMIP </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 5.071086 </td>
-   <td style="text-align:right;"> 0.912 </td>
-   <td style="text-align:right;"> 0.091 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> MUC2 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 4.222438 </td>
-   <td style="text-align:right;"> 0.874 </td>
-   <td style="text-align:right;"> 0.139 </td>
+   <td style="text-align:right;"> 4.050263 </td>
+   <td style="text-align:right;"> 0.624 </td>
+   <td style="text-align:right;"> 0.070 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PTPRN2 </td>
+   <td style="text-align:left;"> EDAR </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3.524203 </td>
-   <td style="text-align:right;"> 0.878 </td>
-   <td style="text-align:right;"> 0.169 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> MYRIP </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3.432499 </td>
-   <td style="text-align:right;"> 0.759 </td>
-   <td style="text-align:right;"> 0.143 </td>
+   <td style="text-align:right;"> 4.164535 </td>
+   <td style="text-align:right;"> 0.393 </td>
+   <td style="text-align:right;"> 0.030 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> ANO7 </td>
+   <td style="text-align:left;"> CASC19 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 4.997656 </td>
-   <td style="text-align:right;"> 0.642 </td>
-   <td style="text-align:right;"> 0.041 </td>
+   <td style="text-align:right;"> 3.181330 </td>
+   <td style="text-align:right;"> 0.557 </td>
+   <td style="text-align:right;"> 0.088 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> FER1L6 </td>
+   <td style="text-align:left;"> NKD1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 4.817227 </td>
-   <td style="text-align:right;"> 0.637 </td>
-   <td style="text-align:right;"> 0.059 </td>
+   <td style="text-align:right;"> 3.075292 </td>
+   <td style="text-align:right;"> 0.551 </td>
+   <td style="text-align:right;"> 0.093 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GRM8 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2.650081 </td>
+   <td style="text-align:right;"> 0.613 </td>
+   <td style="text-align:right;"> 0.116 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AGBL4 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2.578523 </td>
+   <td style="text-align:right;"> 0.584 </td>
+   <td style="text-align:right;"> 0.119 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
 </tbody>
@@ -679,8 +681,10 @@ tapply(markers$p_val_adj, markers$cluster, function(x){
 ```
 
 ```
-##    0    1    2    3    4  5_0  5_1  5_2  5_3    6    7    8    9   10   13   14 
-##  825  489 1323 1463 1495  262  722  241  359 1615  705  339  586  269  302  272
+##    0    1    2    3  5_0  5_1  5_2  5_3    6    7    8    9   10   11   12   13 
+## 1193 1315  533 1462  269  783  231  339 1627  693  320  583  509  291  335  296 
+##   14   15   16 
+##  404  279  272
 ```
 
 ``` r
@@ -704,64 +708,64 @@ head(markers) %>%
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> RBFOX1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 2.034105 </td>
-   <td style="text-align:right;"> 0.855 </td>
-   <td style="text-align:right;"> 0.406 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> RBFOX1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> NXPE1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.678752 </td>
-   <td style="text-align:right;"> 0.975 </td>
-   <td style="text-align:right;"> 0.639 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> NXPE1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> ADAMTSL1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.646397 </td>
-   <td style="text-align:right;"> 0.912 </td>
-   <td style="text-align:right;"> 0.508 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> ADAMTSL1 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> XIST </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.551350 </td>
-   <td style="text-align:right;"> 0.855 </td>
-   <td style="text-align:right;"> 0.353 </td>
+   <td style="text-align:right;"> 1.713669 </td>
+   <td style="text-align:right;"> 0.861 </td>
+   <td style="text-align:right;"> 0.292 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> XIST </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> SATB2 </td>
+   <td style="text-align:left;"> SCNN1B </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.235538 </td>
-   <td style="text-align:right;"> 0.941 </td>
-   <td style="text-align:right;"> 0.659 </td>
+   <td style="text-align:right;"> 1.729461 </td>
+   <td style="text-align:right;"> 0.787 </td>
+   <td style="text-align:right;"> 0.273 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> SATB2 </td>
+   <td style="text-align:left;"> SCNN1B </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> HNF1A-AS1 </td>
+   <td style="text-align:left;"> PDE3A </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.390375 </td>
-   <td style="text-align:right;"> 0.881 </td>
-   <td style="text-align:right;"> 0.559 </td>
+   <td style="text-align:right;"> 1.751226 </td>
+   <td style="text-align:right;"> 0.938 </td>
+   <td style="text-align:right;"> 0.428 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> HNF1A-AS1 </td>
+   <td style="text-align:left;"> PDE3A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NR5A2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.918904 </td>
+   <td style="text-align:right;"> 0.781 </td>
+   <td style="text-align:right;"> 0.311 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> NR5A2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SELENBP1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.881164 </td>
+   <td style="text-align:right;"> 0.796 </td>
+   <td style="text-align:right;"> 0.331 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> SELENBP1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PPARGC1A </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2.246897 </td>
+   <td style="text-align:right;"> 0.706 </td>
+   <td style="text-align:right;"> 0.251 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> PPARGC1A </td>
   </tr>
 </tbody>
 </table>
@@ -806,87 +810,108 @@ lapply(view.markers, function(marker){
 
 ```
 ## 
-## $`4`
+## $`5_0`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-5.png)<!-- -->
 
 ```
 ## 
-## $`5_0`
+## $`5_1`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-6.png)<!-- -->
 
 ```
 ## 
-## $`5_1`
+## $`5_2`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-7.png)<!-- -->
 
 ```
 ## 
-## $`5_2`
+## $`5_3`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-8.png)<!-- -->
 
 ```
 ## 
-## $`5_3`
+## $`6`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-9.png)<!-- -->
 
 ```
 ## 
-## $`6`
+## $`7`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-10.png)<!-- -->
 
 ```
 ## 
-## $`7`
+## $`8`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-11.png)<!-- -->
 
 ```
 ## 
-## $`8`
+## $`9`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-12.png)<!-- -->
 
 ```
 ## 
-## $`9`
+## $`10`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-13.png)<!-- -->
 
 ```
 ## 
-## $`10`
+## $`11`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-14.png)<!-- -->
 
 ```
 ## 
-## $`13`
+## $`12`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-15.png)<!-- -->
 
 ```
 ## 
-## $`14`
+## $`13`
 ```
 
 ![](05-clustering_celltype_files/figure-html/FindAllMarkers-16.png)<!-- -->
+
+```
+## 
+## $`14`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-17.png)<!-- -->
+
+```
+## 
+## $`15`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-18.png)<!-- -->
+
+```
+## 
+## $`16`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-19.png)<!-- -->
 
 ``` r
 # feature plots
@@ -900,112 +925,133 @@ lapply(view.markers, function(marker){
 ## $`0`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-17.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-20.png)<!-- -->
 
 ```
 ## 
 ## $`1`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-18.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-21.png)<!-- -->
 
 ```
 ## 
 ## $`2`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-19.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-22.png)<!-- -->
 
 ```
 ## 
 ## $`3`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-20.png)<!-- -->
-
-```
-## 
-## $`4`
-```
-
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-21.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-23.png)<!-- -->
 
 ```
 ## 
 ## $`5_0`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-22.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-24.png)<!-- -->
 
 ```
 ## 
 ## $`5_1`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-23.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-25.png)<!-- -->
 
 ```
 ## 
 ## $`5_2`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-24.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-26.png)<!-- -->
 
 ```
 ## 
 ## $`5_3`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-25.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-27.png)<!-- -->
 
 ```
 ## 
 ## $`6`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-26.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-28.png)<!-- -->
 
 ```
 ## 
 ## $`7`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-27.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-29.png)<!-- -->
 
 ```
 ## 
 ## $`8`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-28.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-30.png)<!-- -->
 
 ```
 ## 
 ## $`9`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-29.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-31.png)<!-- -->
 
 ```
 ## 
 ## $`10`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-30.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-32.png)<!-- -->
+
+```
+## 
+## $`11`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-33.png)<!-- -->
+
+```
+## 
+## $`12`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-34.png)<!-- -->
 
 ```
 ## 
 ## $`13`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-31.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-35.png)<!-- -->
 
 ```
 ## 
 ## $`14`
 ```
 
-![](05-clustering_celltype_files/figure-html/FindAllMarkers-32.png)<!-- -->
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-36.png)<!-- -->
+
+```
+## 
+## $`15`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-37.png)<!-- -->
+
+```
+## 
+## $`16`
+```
+
+![](05-clustering_celltype_files/figure-html/FindAllMarkers-38.png)<!-- -->
 
 ``` r
 # heat map
@@ -1051,7 +1097,7 @@ getGeneClusterMeans("SMOC2", c("1"))
 
 ```
 ##     mean.in.idents mean.out.of.idents 
-##         0.06505446         0.27696665
+##           1.017707           0.122972
 ```
 
 ``` r
@@ -1079,131 +1125,155 @@ markers.small[,c("cluster", "mean.in.cluster", "mean.out.of.cluster", "avg_log2F
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> RBFOX1 </td>
+   <td style="text-align:left;"> XIST </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 2.4472279 </td>
-   <td style="text-align:right;"> 0.8916247 </td>
-   <td style="text-align:right;"> 2.0341055 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> KCNMA1 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 2.9248186 </td>
-   <td style="text-align:right;"> 0.1774590 </td>
-   <td style="text-align:right;"> 5.0710862 </td>
+   <td style="text-align:right;"> 2.2101441 </td>
+   <td style="text-align:right;"> 0.7100777 </td>
+   <td style="text-align:right;"> 1.713669 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> CEMIP </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 1.6711633 </td>
+   <td style="text-align:right;"> 0.1454736 </td>
+   <td style="text-align:right;"> 4.050263 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> KCNMA1 </td>
    <td style="text-align:left;"> 2 </td>
-   <td style="text-align:right;"> 1.6756835 </td>
-   <td style="text-align:right;"> 0.1465987 </td>
-   <td style="text-align:right;"> 4.0381823 </td>
+   <td style="text-align:right;"> 3.0963487 </td>
+   <td style="text-align:right;"> 0.2346476 </td>
+   <td style="text-align:right;"> 4.714387 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ENSG00000227088 </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:right;"> 1.9786250 </td>
-   <td style="text-align:right;"> 0.0199813 </td>
-   <td style="text-align:right;"> 7.1264153 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SCNN1B </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 1.5708278 </td>
-   <td style="text-align:right;"> 0.9227322 </td>
-   <td style="text-align:right;"> 0.3662769 </td>
+   <td style="text-align:right;"> 1.9809564 </td>
+   <td style="text-align:right;"> 0.0204090 </td>
+   <td style="text-align:right;"> 7.106729 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> LINC00278 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:right;"> 0.7565661 </td>
-   <td style="text-align:right;"> 0.2854624 </td>
-   <td style="text-align:right;"> 1.1396960 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 0.7598408 </td>
+   <td style="text-align:right;"> 0.2831158 </td>
+   <td style="text-align:right;"> 1.157253 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> SLC9A3 </td>
    <td style="text-align:left;"> 5_1 </td>
-   <td style="text-align:right;"> 0.4823360 </td>
-   <td style="text-align:right;"> 0.0151884 </td>
-   <td style="text-align:right;"> 5.4115329 </td>
+   <td style="text-align:right;"> 0.5027155 </td>
+   <td style="text-align:right;"> 0.0153786 </td>
+   <td style="text-align:right;"> 5.439006 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> KCND3 </td>
    <td style="text-align:left;"> 5_2 </td>
-   <td style="text-align:right;"> 0.5098400 </td>
-   <td style="text-align:right;"> 0.0169088 </td>
-   <td style="text-align:right;"> 4.9700114 </td>
+   <td style="text-align:right;"> 0.5073249 </td>
+   <td style="text-align:right;"> 0.0166944 </td>
+   <td style="text-align:right;"> 4.994722 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> CDH13 </td>
    <td style="text-align:left;"> 5_1 </td>
-   <td style="text-align:right;"> 1.0216303 </td>
-   <td style="text-align:right;"> 0.1698600 </td>
-   <td style="text-align:right;"> 3.0163505 </td>
+   <td style="text-align:right;"> 1.0908523 </td>
+   <td style="text-align:right;"> 0.1689067 </td>
+   <td style="text-align:right;"> 3.118900 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> HDAC9 </td>
    <td style="text-align:left;"> 5_1 </td>
-   <td style="text-align:right;"> 0.9094500 </td>
-   <td style="text-align:right;"> 0.2483312 </td>
-   <td style="text-align:right;"> 1.9275863 </td>
+   <td style="text-align:right;"> 0.9552779 </td>
+   <td style="text-align:right;"> 0.2454293 </td>
+   <td style="text-align:right;"> 2.019423 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> NUSAP1 </td>
-   <td style="text-align:left;"> 7 </td>
-   <td style="text-align:right;"> 1.0219056 </td>
-   <td style="text-align:right;"> 0.0566234 </td>
-   <td style="text-align:right;"> 4.6308676 </td>
+   <td style="text-align:left;"> DIAPH3 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:right;"> 0.6905352 </td>
+   <td style="text-align:right;"> 0.1227073 </td>
+   <td style="text-align:right;"> 2.505526 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> CALD1 </td>
    <td style="text-align:left;"> 8 </td>
-   <td style="text-align:right;"> 2.7791941 </td>
-   <td style="text-align:right;"> 0.0433339 </td>
-   <td style="text-align:right;"> 7.1432480 </td>
+   <td style="text-align:right;"> 2.7860202 </td>
+   <td style="text-align:right;"> 0.0431066 </td>
+   <td style="text-align:right;"> 7.177446 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> NOTCH2 </td>
    <td style="text-align:left;"> 9 </td>
-   <td style="text-align:right;"> 2.7472839 </td>
-   <td style="text-align:right;"> 0.1420540 </td>
-   <td style="text-align:right;"> 5.5497559 </td>
+   <td style="text-align:right;"> 2.7695987 </td>
+   <td style="text-align:right;"> 0.1427036 </td>
+   <td style="text-align:right;"> 5.561178 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> CHST11 </td>
+   <td style="text-align:left;"> REG4 </td>
    <td style="text-align:left;"> 10 </td>
-   <td style="text-align:right;"> 2.1137727 </td>
-   <td style="text-align:right;"> 0.0484920 </td>
-   <td style="text-align:right;"> 6.3438692 </td>
+   <td style="text-align:right;"> 0.9806473 </td>
+   <td style="text-align:right;"> 0.0306120 </td>
+   <td style="text-align:right;"> 5.588265 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> EGFL7 </td>
+   <td style="text-align:left;"> DOCK2 </td>
+   <td style="text-align:left;"> 11 </td>
+   <td style="text-align:right;"> 1.7406667 </td>
+   <td style="text-align:right;"> 0.0308358 </td>
+   <td style="text-align:right;"> 6.362020 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SMOC2 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 1.0177069 </td>
+   <td style="text-align:right;"> 0.1229720 </td>
+   <td style="text-align:right;"> 3.327579 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CD96 </td>
    <td style="text-align:left;"> 13 </td>
-   <td style="text-align:right;"> 1.1791919 </td>
-   <td style="text-align:right;"> 0.0034060 </td>
-   <td style="text-align:right;"> 9.2892294 </td>
+   <td style="text-align:right;"> 2.2774955 </td>
+   <td style="text-align:right;"> 0.0181706 </td>
+   <td style="text-align:right;"> 7.954007 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> LDB2 </td>
+   <td style="text-align:left;"> 14 </td>
+   <td style="text-align:right;"> 2.8090358 </td>
+   <td style="text-align:right;"> 0.0257107 </td>
+   <td style="text-align:right;"> 7.840347 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> IRAG2 </td>
+   <td style="text-align:left;"> 11 </td>
+   <td style="text-align:right;"> 0.5138023 </td>
+   <td style="text-align:right;"> 0.0431771 </td>
+   <td style="text-align:right;"> 2.484657 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> RIMS2 </td>
-   <td style="text-align:left;"> 14 </td>
-   <td style="text-align:right;"> 2.6670242 </td>
-   <td style="text-align:right;"> 0.0090534 </td>
-   <td style="text-align:right;"> 9.8329481 </td>
+   <td style="text-align:left;"> 16 </td>
+   <td style="text-align:right;"> 2.6669021 </td>
+   <td style="text-align:right;"> 0.0087764 </td>
+   <td style="text-align:right;"> 9.897168 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
 </tbody>
@@ -1338,13 +1408,13 @@ es.max[,1]
 
 ```
 ##         Smooth muscle cells              Lymphoid cells 
-##                  -0.3636781                  -0.1108393 
+##                  -0.3596284                  -0.1115503 
 ## Intestinal epithelial cells                    ENS glia 
-##                  -0.4479756                  -0.1363974 
+##                  -0.4529272                  -0.1377867 
 ##  Vascular endothelial cells               Stromal cells 
-##                  -0.1014542                  -0.1532908 
+##                  -0.1021364                  -0.1612953 
 ## Lymphatic endothelial cells                  Tuft cells 
-##                   2.1557870                   0.6969473
+##                   2.1633843                   0.7126830
 ```
 
 ### Score clusters
@@ -1377,187 +1447,220 @@ cluster.ScType %>%
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Lymphatic endothelial cells </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> ENS glia </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Lymphoid cells </th>
-   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Vascular endothelial cells </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Stromal cells </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Vascular endothelial cells </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Smooth muscle cells </th>
-   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Tuft cells </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Intestinal epithelial cells </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Tuft cells </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 87.7378776 </td>
-   <td style="text-align:right;"> -5.604127 </td>
-   <td style="text-align:right;"> -100.553219 </td>
-   <td style="text-align:right;"> -110.834542 </td>
-   <td style="text-align:right;"> -134.7583553 </td>
-   <td style="text-align:right;"> -160.546668 </td>
+   <td style="text-align:right;"> 195.3592499 </td>
+   <td style="text-align:right;"> -80.0907487 </td>
+   <td style="text-align:right;"> -125.8295023 </td>
+   <td style="text-align:right;"> -154.744953 </td>
+   <td style="text-align:right;"> -163.3416069 </td>
+   <td style="text-align:right;"> -308.700705 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> -23.5091750 </td>
+   <td style="text-align:right;"> 38.5714704 </td>
+   <td style="text-align:right;"> -39.7142237 </td>
+   <td style="text-align:right;"> -90.642861 </td>
+   <td style="text-align:right;"> -44.6501467 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -20.493367 </td>
-   <td style="text-align:right;"> -86.545933 </td>
-   <td style="text-align:right;"> -58.613385 </td>
-   <td style="text-align:right;"> -95.9900018 </td>
-   <td style="text-align:right;"> 266.466891 </td>
-   <td style="text-align:right;"> 276.54233 </td>
+   <td style="text-align:right;"> -40.527065 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2 </td>
-   <td style="text-align:right;"> -19.4149079 </td>
-   <td style="text-align:right;"> 41.549581 </td>
-   <td style="text-align:right;"> -37.805579 </td>
-   <td style="text-align:right;"> -44.034424 </td>
-   <td style="text-align:right;"> -96.3785689 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -16.0594898 </td>
+   <td style="text-align:right;"> -67.4117468 </td>
+   <td style="text-align:right;"> -86.399911 </td>
+   <td style="text-align:right;"> -42.8565375 </td>
+   <td style="text-align:right;"> 165.963781 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -39.581128 </td>
+   <td style="text-align:right;"> 282.663857 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -13.676205 </td>
-   <td style="text-align:right;"> -22.021587 </td>
-   <td style="text-align:right;"> 31.148505 </td>
-   <td style="text-align:right;"> -30.4911573 </td>
-   <td style="text-align:right;"> -4.270566 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 139.287912 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 4 </td>
-   <td style="text-align:right;"> 118.6766979 </td>
-   <td style="text-align:right;"> -57.538190 </td>
-   <td style="text-align:right;"> -31.830609 </td>
-   <td style="text-align:right;"> -47.293829 </td>
-   <td style="text-align:right;"> -31.1877105 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -39.64303 </td>
+   <td style="text-align:right;"> -15.2893895 </td>
+   <td style="text-align:right;"> -19.7531236 </td>
+   <td style="text-align:right;"> -28.330715 </td>
+   <td style="text-align:right;"> 30.7432225 </td>
+   <td style="text-align:right;"> -7.704916 </td>
+   <td style="text-align:right;"> 139.124387 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 5_0 </td>
-   <td style="text-align:right;"> -2.1521834 </td>
-   <td style="text-align:right;"> 6.739549 </td>
-   <td style="text-align:right;"> -32.525223 </td>
-   <td style="text-align:right;"> -34.517383 </td>
-   <td style="text-align:right;"> -45.1453270 </td>
+   <td style="text-align:right;"> 0.5665667 </td>
+   <td style="text-align:right;"> 0.4910627 </td>
+   <td style="text-align:right;"> -29.0221662 </td>
+   <td style="text-align:right;"> -48.314152 </td>
+   <td style="text-align:right;"> -32.3981223 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -94.637951 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -99.447739 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 5_1 </td>
-   <td style="text-align:right;"> 6.6622500 </td>
+   <td style="text-align:right;"> 10.8146520 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 3.787856 </td>
-   <td style="text-align:right;"> -8.950350 </td>
-   <td style="text-align:right;"> -9.8834830 </td>
+   <td style="text-align:right;"> 4.5434425 </td>
+   <td style="text-align:right;"> -8.913896 </td>
+   <td style="text-align:right;"> -8.3977374 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 27.57278 </td>
-   <td style="text-align:right;"> 82.371743 </td>
+   <td style="text-align:right;"> 79.172784 </td>
+   <td style="text-align:right;"> 28.591158 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 5_2 </td>
-   <td style="text-align:right;"> -16.8508058 </td>
-   <td style="text-align:right;"> -5.342219 </td>
-   <td style="text-align:right;"> -4.376185 </td>
-   <td style="text-align:right;"> -8.756197 </td>
-   <td style="text-align:right;"> -0.2337756 </td>
+   <td style="text-align:right;"> -17.6516579 </td>
+   <td style="text-align:right;"> -6.0084065 </td>
+   <td style="text-align:right;"> -5.4276554 </td>
+   <td style="text-align:right;"> -6.910908 </td>
+   <td style="text-align:right;"> -9.3271656 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -7.744006 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -9.098947 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 5_3 </td>
-   <td style="text-align:right;"> 30.1754620 </td>
-   <td style="text-align:right;"> -1.354951 </td>
-   <td style="text-align:right;"> -5.832314 </td>
-   <td style="text-align:right;"> -5.169916 </td>
-   <td style="text-align:right;"> -7.2313034 </td>
+   <td style="text-align:right;"> 26.5719754 </td>
+   <td style="text-align:right;"> -7.2671514 </td>
+   <td style="text-align:right;"> -6.0062536 </td>
+   <td style="text-align:right;"> -7.306450 </td>
+   <td style="text-align:right;"> -5.1087651 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -14.39365 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -12.913968 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 6 </td>
-   <td style="text-align:right;"> 87.0996915 </td>
+   <td style="text-align:right;"> 84.5148675 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -14.926685 </td>
-   <td style="text-align:right;"> -38.410281 </td>
-   <td style="text-align:right;"> -30.5241198 </td>
+   <td style="text-align:right;"> -13.5521554 </td>
+   <td style="text-align:right;"> -28.216546 </td>
+   <td style="text-align:right;"> -36.6926671 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 258.86783 </td>
-   <td style="text-align:right;"> 263.174753 </td>
+   <td style="text-align:right;"> 258.908291 </td>
+   <td style="text-align:right;"> 247.958134 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 7 </td>
-   <td style="text-align:right;"> 43.2487916 </td>
-   <td style="text-align:right;"> 8.538654 </td>
+   <td style="text-align:right;"> 38.4993114 </td>
+   <td style="text-align:right;"> 12.6613201 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -11.153706 </td>
-   <td style="text-align:right;"> -29.2848852 </td>
-   <td style="text-align:right;"> -8.402164 </td>
-   <td style="text-align:right;"> 34.97969 </td>
+   <td style="text-align:right;"> -31.180464 </td>
+   <td style="text-align:right;"> -11.8465241 </td>
+   <td style="text-align:right;"> -5.162839 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 30.476883 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 8 </td>
-   <td style="text-align:right;"> 32.5489313 </td>
-   <td style="text-align:right;"> 18.638932 </td>
-   <td style="text-align:right;"> 1.528065 </td>
-   <td style="text-align:right;"> 23.905926 </td>
-   <td style="text-align:right;"> 539.0313173 </td>
-   <td style="text-align:right;"> 512.913159 </td>
+   <td style="text-align:right;"> 33.5529602 </td>
+   <td style="text-align:right;"> 18.3513659 </td>
+   <td style="text-align:right;"> 0.5603312 </td>
+   <td style="text-align:right;"> 538.845499 </td>
+   <td style="text-align:right;"> 23.4446944 </td>
+   <td style="text-align:right;"> 510.701600 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 9 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 9.689404 </td>
-   <td style="text-align:right;"> -11.593291 </td>
-   <td style="text-align:right;"> -2.777240 </td>
-   <td style="text-align:right;"> -17.8104451 </td>
+   <td style="text-align:right;"> 9.8062122 </td>
+   <td style="text-align:right;"> -11.5270313 </td>
+   <td style="text-align:right;"> -17.694649 </td>
+   <td style="text-align:right;"> -2.6660638 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> -27.71397 </td>
-   <td style="text-align:right;"> 546.455908 </td>
+   <td style="text-align:right;"> 546.525733 </td>
+   <td style="text-align:right;"> -26.681074 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10 </td>
-   <td style="text-align:right;"> -15.3437347 </td>
-   <td style="text-align:right;"> 20.659288 </td>
-   <td style="text-align:right;"> 329.428586 </td>
-   <td style="text-align:right;"> 28.334859 </td>
-   <td style="text-align:right;"> -20.7395694 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 149.27955 </td>
+   <td style="text-align:right;"> 1.1565236 </td>
+   <td style="text-align:right;"> -18.9557577 </td>
+   <td style="text-align:right;"> -8.319629 </td>
+   <td style="text-align:right;"> -15.3652684 </td>
+   <td style="text-align:right;"> 95.063943 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -10.310030 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 11 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 4.2974245 </td>
+   <td style="text-align:right;"> -0.7037958 </td>
+   <td style="text-align:right;"> -10.826832 </td>
+   <td style="text-align:right;"> 28.6889070 </td>
+   <td style="text-align:right;"> -26.642138 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 79.481078 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 12 </td>
+   <td style="text-align:right;"> 16.8617145 </td>
+   <td style="text-align:right;"> 17.4928064 </td>
+   <td style="text-align:right;"> -7.9169431 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 5.3327396 </td>
+   <td style="text-align:right;"> 19.480815 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -8.932543 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13 </td>
-   <td style="text-align:right;"> -0.9443133 </td>
-   <td style="text-align:right;"> 46.375058 </td>
-   <td style="text-align:right;"> 5.309052 </td>
-   <td style="text-align:right;"> 220.704912 </td>
-   <td style="text-align:right;"> -13.7513072 </td>
+   <td style="text-align:right;"> 11.3321455 </td>
+   <td style="text-align:right;"> 15.8081143 </td>
+   <td style="text-align:right;"> 328.7004295 </td>
+   <td style="text-align:right;"> -10.546189 </td>
+   <td style="text-align:right;"> -0.8110521 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 211.30776 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 65.507083 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 14 </td>
-   <td style="text-align:right;"> -3.9295706 </td>
-   <td style="text-align:right;"> -3.319804 </td>
-   <td style="text-align:right;"> -2.833958 </td>
-   <td style="text-align:right;"> -2.579368 </td>
-   <td style="text-align:right;"> -3.5508860 </td>
-   <td style="text-align:right;"> -7.890572 </td>
+   <td style="text-align:right;"> 7.2797743 </td>
+   <td style="text-align:right;"> 18.5154041 </td>
+   <td style="text-align:right;"> -6.4068253 </td>
+   <td style="text-align:right;"> -8.001712 </td>
+   <td style="text-align:right;"> 223.9865706 </td>
+   <td style="text-align:right;"> -11.006069 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 15 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 27.2964163 </td>
+   <td style="text-align:right;"> 10.8899287 </td>
+   <td style="text-align:right;"> -6.385268 </td>
+   <td style="text-align:right;"> -3.9160561 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> -2.926101 </td>
+   <td style="text-align:right;"> 242.841968 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 16 </td>
+   <td style="text-align:right;"> -3.8282322 </td>
+   <td style="text-align:right;"> -3.3227180 </td>
+   <td style="text-align:right;"> -2.9070881 </td>
+   <td style="text-align:right;"> -3.589013 </td>
+   <td style="text-align:right;"> -2.5978425 </td>
+   <td style="text-align:right;"> -7.873948 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
   </tr>
@@ -1656,7 +1759,7 @@ sessionInfo()
 ```
 
 ```
-## R version 4.4.0 (2024-04-24)
+## R version 4.4.3 (2025-02-28)
 ## Platform: aarch64-apple-darwin20
 ## Running under: macOS Ventura 13.7.1
 ## 
@@ -1677,53 +1780,55 @@ sessionInfo()
 ## other attached packages:
 ## [1] ComplexHeatmap_2.20.0 HGNChelper_0.8.14     ggplot2_3.5.1        
 ## [4] dplyr_1.1.4           tidyr_1.3.1           kableExtra_1.4.0     
-## [7] Seurat_5.1.0          SeuratObject_5.0.2    sp_2.1-4             
+## [7] Seurat_5.2.1          SeuratObject_5.0.2    sp_2.1-4             
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] RColorBrewer_1.1-3     shape_1.4.6.1          rstudioapi_0.16.0     
-##   [4] jsonlite_1.8.8         magrittr_2.0.3         spatstat.utils_3.0-4  
-##   [7] farver_2.1.2           rmarkdown_2.27         GlobalOptions_0.1.2   
-##  [10] vctrs_0.6.5            ROCR_1.0-11            spatstat.explore_3.2-7
-##  [13] htmltools_0.5.8.1      sass_0.4.9             sctransform_0.4.1     
-##  [16] parallelly_1.37.1      KernSmooth_2.23-22     bslib_0.7.0           
-##  [19] htmlwidgets_1.6.4      ica_1.0-3              plyr_1.8.9            
-##  [22] plotly_4.10.4          zoo_1.8-12             cachem_1.1.0          
-##  [25] igraph_2.0.3           mime_0.12              lifecycle_1.0.4       
-##  [28] iterators_1.0.14       pkgconfig_2.0.3        Matrix_1.7-0          
-##  [31] R6_2.5.1               fastmap_1.2.0          clue_0.3-65           
-##  [34] fitdistrplus_1.1-11    future_1.33.2          shiny_1.8.1.1         
-##  [37] digest_0.6.35          colorspace_2.1-0       S4Vectors_0.42.0      
-##  [40] patchwork_1.2.0        tensor_1.5             RSpectra_0.16-1       
-##  [43] irlba_2.3.5.1          labeling_0.4.3         progressr_0.14.0      
-##  [46] fansi_1.0.6            spatstat.sparse_3.0-3  httr_1.4.7            
-##  [49] polyclip_1.10-6        abind_1.4-5            compiler_4.4.0        
-##  [52] withr_3.0.0            doParallel_1.0.17      viridis_0.6.5         
-##  [55] fastDummies_1.7.3      highr_0.11             MASS_7.3-60.2         
-##  [58] rjson_0.2.21           tools_4.4.0            splitstackshape_1.4.8 
-##  [61] lmtest_0.9-40          ape_5.8                zip_2.3.1             
-##  [64] httpuv_1.6.15          future.apply_1.11.2    goftest_1.2-3         
-##  [67] glue_1.7.0             nlme_3.1-164           promises_1.3.0        
-##  [70] Rtsne_0.17             cluster_2.1.6          reshape2_1.4.4        
-##  [73] generics_0.1.3         gtable_0.3.5           spatstat.data_3.0-4   
-##  [76] data.table_1.15.4      xml2_1.3.6             utf8_1.2.4            
-##  [79] BiocGenerics_0.50.0    spatstat.geom_3.2-9    RcppAnnoy_0.0.22      
-##  [82] ggrepel_0.9.5          RANN_2.6.1             foreach_1.5.2         
-##  [85] pillar_1.9.0           stringr_1.5.1          limma_3.60.2          
-##  [88] spam_2.10-0            RcppHNSW_0.6.0         later_1.3.2           
-##  [91] circlize_0.4.16        splines_4.4.0          lattice_0.22-6        
-##  [94] survival_3.5-8         deldir_2.0-4           tidyselect_1.2.1      
-##  [97] miniUI_0.1.1.1         pbapply_1.7-2          knitr_1.47            
-## [100] gridExtra_2.3          IRanges_2.38.0         svglite_2.1.3         
-## [103] scattermore_1.2        stats4_4.4.0           xfun_0.44             
-## [106] statmod_1.5.0          matrixStats_1.3.0      stringi_1.8.4         
-## [109] lazyeval_0.2.2         yaml_2.3.8             evaluate_0.23         
-## [112] codetools_0.2-20       tibble_3.2.1           cli_3.6.2             
-## [115] uwot_0.2.2             xtable_1.8-4           reticulate_1.39.0     
-## [118] systemfonts_1.1.0      munsell_0.5.1          jquerylib_0.1.4       
-## [121] Rcpp_1.0.12            globals_0.16.3         spatstat.random_3.2-3 
-## [124] png_0.1-8              parallel_4.4.0         presto_1.0.0          
-## [127] dotCall64_1.1-1        listenv_0.9.1          viridisLite_0.4.2     
-## [130] scales_1.3.0           ggridges_0.5.6         openxlsx_4.2.5.2      
-## [133] crayon_1.5.2           leiden_0.4.3.1         purrr_1.0.2           
-## [136] GetoptLong_1.0.5       rlang_1.1.3            cowplot_1.1.3
+##   [4] jsonlite_1.8.8         magrittr_2.0.3         magick_2.8.5          
+##   [7] ggbeeswarm_0.7.2       spatstat.utils_3.1-2   farver_2.1.2          
+##  [10] rmarkdown_2.27         GlobalOptions_0.1.2    vctrs_0.6.5           
+##  [13] ROCR_1.0-11            Cairo_1.6-2            spatstat.explore_3.2-7
+##  [16] htmltools_0.5.8.1      sass_0.4.9             sctransform_0.4.1     
+##  [19] parallelly_1.37.1      KernSmooth_2.23-26     bslib_0.7.0           
+##  [22] htmlwidgets_1.6.4      ica_1.0-3              plyr_1.8.9            
+##  [25] plotly_4.10.4          zoo_1.8-12             cachem_1.1.0          
+##  [28] igraph_2.0.3           mime_0.12              lifecycle_1.0.4       
+##  [31] iterators_1.0.14       pkgconfig_2.0.3        Matrix_1.7-2          
+##  [34] R6_2.5.1               fastmap_1.2.0          clue_0.3-65           
+##  [37] fitdistrplus_1.1-11    future_1.33.2          shiny_1.8.1.1         
+##  [40] digest_0.6.35          colorspace_2.1-0       S4Vectors_0.44.0      
+##  [43] patchwork_1.2.0        tensor_1.5             RSpectra_0.16-1       
+##  [46] irlba_2.3.5.1          labeling_0.4.3         progressr_0.14.0      
+##  [49] fansi_1.0.6            spatstat.sparse_3.0-3  httr_1.4.7            
+##  [52] polyclip_1.10-6        abind_1.4-5            compiler_4.4.3        
+##  [55] withr_3.0.0            doParallel_1.0.17      viridis_0.6.5         
+##  [58] fastDummies_1.7.3      highr_0.11             MASS_7.3-64           
+##  [61] rjson_0.2.21           tools_4.4.3            splitstackshape_1.4.8 
+##  [64] vipor_0.4.7            lmtest_0.9-40          ape_5.8               
+##  [67] beeswarm_0.4.0         zip_2.3.1              httpuv_1.6.15         
+##  [70] future.apply_1.11.2    goftest_1.2-3          glue_1.7.0            
+##  [73] nlme_3.1-167           promises_1.3.0         Rtsne_0.17            
+##  [76] cluster_2.1.8          reshape2_1.4.4         generics_0.1.3        
+##  [79] gtable_0.3.5           spatstat.data_3.0-4    data.table_1.15.4     
+##  [82] xml2_1.3.6             utf8_1.2.4             BiocGenerics_0.50.0   
+##  [85] spatstat.geom_3.2-9    RcppAnnoy_0.0.22       ggrepel_0.9.5         
+##  [88] RANN_2.6.1             foreach_1.5.2          pillar_1.9.0          
+##  [91] stringr_1.5.1          limma_3.60.2           spam_2.10-0           
+##  [94] RcppHNSW_0.6.0         later_1.3.2            circlize_0.4.16       
+##  [97] splines_4.4.3          lattice_0.22-6         survival_3.8-3        
+## [100] deldir_2.0-4           tidyselect_1.2.1       miniUI_0.1.1.1        
+## [103] pbapply_1.7-2          knitr_1.47             gridExtra_2.3         
+## [106] IRanges_2.38.0         svglite_2.1.3          scattermore_1.2       
+## [109] stats4_4.4.3           xfun_0.44              statmod_1.5.0         
+## [112] matrixStats_1.3.0      stringi_1.8.4          lazyeval_0.2.2        
+## [115] yaml_2.3.8             evaluate_0.23          codetools_0.2-20      
+## [118] tibble_3.2.1           cli_3.6.2              uwot_0.2.2            
+## [121] xtable_1.8-4           reticulate_1.39.0      systemfonts_1.1.0     
+## [124] munsell_0.5.1          jquerylib_0.1.4        Rcpp_1.0.12           
+## [127] globals_0.16.3         spatstat.random_3.2-3  png_0.1-8             
+## [130] ggrastr_1.0.2          parallel_4.4.3         presto_1.0.0          
+## [133] dotCall64_1.1-1        listenv_0.9.1          viridisLite_0.4.2     
+## [136] scales_1.3.0           ggridges_0.5.6         openxlsx_4.2.5.2      
+## [139] crayon_1.5.2           purrr_1.0.2            GetoptLong_1.0.5      
+## [142] rlang_1.1.3            cowplot_1.1.3
 ```
