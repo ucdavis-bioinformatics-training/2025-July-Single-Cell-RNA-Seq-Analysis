@@ -142,8 +142,7 @@ PlotClusterTree(experiment.aggregate)
 In many experiments, the clustering resolution does not need to be uniform across all of the cell types present. While for some cell types of interest fine detail may be desirable, for others, simply grouping them into a larger parent cluster is sufficient. Merging cluster is very straightforward.
 ```{r merge}
 experiment.aggregate <- RenameIdents(experiment.aggregate,
-                                     '11' = '10',
-                                     '12' = '13')
+                                     '4' = '0')
 experiment.aggregate$res.0.4_merged <- Idents(experiment.aggregate)
 table(experiment.aggregate$res.0.4_merged)
 experiment.aggregate@meta.data %>%
@@ -194,9 +193,9 @@ experiment.aggregate <- FindSubCluster(experiment.aggregate,
                                        cluster = 5,
                                        subcluster.name = "subcluster")
 experiment.aggregate$subcluster <- factor(experiment.aggregate$subcluster,
-                                          levels = c(as.character(0:4),
+                                          levels = c(as.character(0:3),
                                                      "5_0", "5_1", "5_2", "5_3",
-                                                     as.character(c(6:10, 13, 14))))
+                                                     as.character(6:16)))
 DimPlot(experiment.aggregate,
         reduction = "umap",
         group.by = "subcluster",
