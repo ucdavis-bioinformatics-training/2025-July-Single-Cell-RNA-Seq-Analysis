@@ -524,9 +524,69 @@ DimPlot(experiment.aggregate,
   scale_color_viridis_d()
 ```
 
-```{r cell_type_heat}
-types <- grep("Unknown", unique(experiment.aggregate$subcluster_ScType_filtered), value = TRUE, invert = TRUE)
-type.markers <- unlist(lapply(gs.list$gs_positive[types], function(m){
+There is a large portion of the cells unassigned with a cell type. Could it be because of the cell types that we included from the database is not comprehensive? Based on the understanding that gut tract involves many immune related cell types, we are going to modify the procedure slightly to reflect this.
+
+```{r cell_type_2tissue}
+## prepare cell type marker database
+source("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/main/software_scripts/scripts/mygene_sets_prepare.R")
+
+gs.list.2tissues <- mygene_sets_prepare(db.URL, cell_type = c("Intestine", "Immune system"))
+
+gs.list.2tissues$gs_positive$`Tuft cells` <- c("SUCNR1", "FABP1", "POU2F3", "SIGLECF", "CDHR2", "AVIL", "ESPN", "LRMP", "TRPM5", "DCLK1", "TAS1R3", "SOX9", "TUBB5", "CAMK2B", "GNAT3", "IL25", "PLCB2", "GFI1B", "ATOH1", "CD24A", "ASIC5", "KLF3", "KLF6", "DRD3", "NRADD", "GNG13", "NREP", "RGS2", "RAC2", "PTGS1", "IRF7", "FFAR3", "ALOX5", "TSLP", "IL4RA", "IL13RA1", "IL17RB", "PTPRC")
+gs.list.2tissues$gs_negative$`Tuft cells` <- NULL
+
+## calculate cell type marker scores
+es.max <- sctype_score(GetAssayData(experiment.aggregate, layer = "scale"),
+                       scaled = TRUE,
+                       gs = gs.list.2tissues$gs_positive,
+                       gs2 = gs.list.2tissues$gs_negative)
+
+clusters <- sort(unique(experiment.aggregate$subcluster))
+tmp <- lapply(clusters, function(cluster){
+  es.max.cluster = sort(rowSums(es.max[, experiment.aggregate$subcluster == cluster]), decreasing = TRUE)
+  out = head(data.frame(subcluster = cluster,
+                        ScType = names(es.max.cluster),
+                        scores = es.max.cluster,
+                        ncells = sum(experiment.aggregate$subcluster == cluster)))
+  out$rank = 1:length(out$scores)
+  return(out)
+})
+cluster.ScType <- do.call("rbind", tmp)
+cluster.ScType %>%
+  pivot_wider(id_cols = subcluster,
+              names_from = ScType,
+              values_from = scores) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped"), fixed_thead = TRUE)
+
+## Get the most likely cell type for each cluster
+cluster.ScType.top <- cluster.ScType %>%
+  filter(rank == 1) %>%
+  select(subcluster, ncells, ScType, scores)
+rownames(cluster.ScType.top) <- cluster.ScType.top$subcluster
+cluster.ScType.top <- cluster.ScType.top %>%
+  rename("score" = scores)
+
+## filter new cell types and assign it to Seurat object
+subcluster.ScType <- cluster.ScType.top[experiment.aggregate$subcluster, "ScType"]
+
+cluster.ScType.top <- cluster.ScType.top %>%
+  mutate(ScType_filtered = ifelse(score >= ncells / 4, ScType, "Unknown"))
+subcluster.ScType.filtered <- cluster.ScType.top[experiment.aggregate$subcluster, "ScType_filtered"]
+experiment.aggregate <- AddMetaData(experiment.aggregate,
+                                    metadata = subcluster.ScType.filtered,
+                                    col.name = "subcluster_ScType_2tissue")
+DimPlot(experiment.aggregate,
+        reduction = "umap",
+        group.by = "subcluster_ScType_2tissue",
+        shuffle = TRUE) +
+  scale_color_viridis_d()
+```
+
+
+```{r cell_type_heat, fig.width = 16}
+types <- grep("Unknown", unique(experiment.aggregate$subcluster_ScType_2tissue), value = TRUE, invert = TRUE)
+type.markers <- unlist(lapply(gs.list.2tissues$gs_positive[types], function(m){
   rownames(markers[which(m %in% rownames(markers)),])
 }))
 type.markers <- type.markers[!duplicated(type.markers)]
