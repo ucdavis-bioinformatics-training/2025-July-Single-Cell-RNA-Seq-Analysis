@@ -2627,6 +2627,146 @@ Heatmap(mat,
 
 ![](05-clustering_celltype_files/figure-html/cell_type_heat-1.png)<!-- -->
 
+### Cell type annotation using large language model (GPT-4)
+
+Machine learning techniques have been an integrative part of bioinformatics work. In recent years, large language model and deep learning techniques have been applied to many fields, such as computer vision, text processing, .... Deep learning has been used in many areas of bioinformatics as well, such as Deepvariant for variant discovery, Dorado for signal processing to basecall Oxford Nanopore data, AlphaFold for protein structural prediction. Recently, one study assessed the ability of GPT models to annotate single cell data, GPTCelltype. It requires to have a subscription to query OpenAI API, so I ran the analysis. I am providing the results here so that you can compare it with the celltypes that we generated using marker genes.
+
+First thing that I noticed is that I got slightly different results for the 3 times that I ran the analysis.
+
+
+``` r
+celltypes.gpt <- readRDS("celltype.gpt.rds")
+kable(celltypes.gpt, 'html', align = 'c') %>% kable_styling(bootstrap_options = c("condensed", "responsive", "striped"))
+```
+
+<table class="table table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Analysis1 </th>
+   <th style="text-align:center;"> Analysis2 </th>
+   <th style="text-align:center;"> Analysis3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:center;"> Pancreatic alpha cells </td>
+   <td style="text-align:center;"> Osteoblasts </td>
+   <td style="text-align:center;"> Parietal Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:center;"> Intestinal stem cells </td>
+   <td style="text-align:center;"> Intestinal Stem Cells </td>
+   <td style="text-align:center;"> Intestinal Epithelial Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:center;"> Goblet cells </td>
+   <td style="text-align:center;"> Goblet Cells </td>
+   <td style="text-align:center;"> Goblet Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:center;"> Liver cells </td>
+   <td style="text-align:center;"> Cancer Cells (Broad type, specific type unknown) </td>
+   <td style="text-align:center;"> Tumor Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5_0 </td>
+   <td style="text-align:center;"> Testis cells </td>
+   <td style="text-align:center;"> Prostate Cancer Cells </td>
+   <td style="text-align:center;"> Tumor Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5_1 </td>
+   <td style="text-align:center;"> Colon cells </td>
+   <td style="text-align:center;"> Colon Cells </td>
+   <td style="text-align:center;"> Colon Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5_2 </td>
+   <td style="text-align:center;"> Duodenal cells </td>
+   <td style="text-align:center;"> Pancreatic Cells </td>
+   <td style="text-align:center;"> Small Intestinal Epithelial Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5_3 </td>
+   <td style="text-align:center;"> Heart cells </td>
+   <td style="text-align:center;"> Heart Cells </td>
+   <td style="text-align:center;"> Endothelial Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 6 </td>
+   <td style="text-align:center;"> Cardiac cells </td>
+   <td style="text-align:center;"> Liver Cells </td>
+   <td style="text-align:center;"> Enterochromaffin Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 7 </td>
+   <td style="text-align:center;"> Mitotic cells </td>
+   <td style="text-align:center;"> Mitotic Cells (Broad type, specific type unknown) </td>
+   <td style="text-align:center;"> Mitotic Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 8 </td>
+   <td style="text-align:center;"> Mesenchymal cells </td>
+   <td style="text-align:center;"> Endothelial Cells </td>
+   <td style="text-align:center;"> Smooth Muscle Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 9 </td>
+   <td style="text-align:center;"> Neural cells </td>
+   <td style="text-align:center;"> Neuronal Cells </td>
+   <td style="text-align:center;"> Neural Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 10 </td>
+   <td style="text-align:center;"> Pancreatic cells </td>
+   <td style="text-align:center;"> Enterocytes </td>
+   <td style="text-align:center;"> Gastric Mucosa Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 11 </td>
+   <td style="text-align:center;"> Immune cells </td>
+   <td style="text-align:center;"> Immune Cells (Broad type, specific type unknown) </td>
+   <td style="text-align:center;"> Immune Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 12 </td>
+   <td style="text-align:center;"> Neurons </td>
+   <td style="text-align:center;"> Neurons </td>
+   <td style="text-align:center;"> Neurons </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13 </td>
+   <td style="text-align:center;"> T cells </td>
+   <td style="text-align:center;"> T Cells </td>
+   <td style="text-align:center;"> T cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 14 </td>
+   <td style="text-align:center;"> Endothelial cells </td>
+   <td style="text-align:center;"> Endothelial Cells </td>
+   <td style="text-align:center;"> Endothelial Cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 15 </td>
+   <td style="text-align:center;"> Mucosal cells </td>
+   <td style="text-align:center;"> B Cells </td>
+   <td style="text-align:center;"> T cells </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 16 </td>
+   <td style="text-align:center;"> Neurons </td>
+   <td style="text-align:center;"> Neurons </td>
+   <td style="text-align:center;"> Neurons </td>
+  </tr>
+</tbody>
+</table>
+
+
 ## Prepare for the next section
 
 #### Save the Seurat object and download the next Rmd file
