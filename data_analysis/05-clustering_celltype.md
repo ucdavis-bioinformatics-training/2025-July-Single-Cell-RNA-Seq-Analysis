@@ -2635,6 +2635,7 @@ First thing that I noticed is that I got slightly different results for the 3 ti
 
 
 ``` r
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2025-July-Single-Cell-RNA-Seq-Analysis/main/data_analysis/celltype.gpt.rds", "celltype.gpt.rds")
 celltypes.gpt <- readRDS("celltype.gpt.rds")
 kable(celltypes.gpt, 'html', align = 'c') %>% kable_styling(bootstrap_options = c("condensed", "responsive", "striped"))
 ```
