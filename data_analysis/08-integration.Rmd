@@ -185,10 +185,65 @@ DimPlot(experiment.aggregate,
 
 In this case, integration appears to have interfered with forming easily-interpreted clusters. There is very little relationship between location on the UMAP and cluster identity, which makes it harder to identify possible cell populations at a glance. We can add the integrated object's cluster identities to the un-integrated object if we choose, though projecting the integrated clustering onto the un-integrated UMAP is unlikely to be useful.
 
-#### Save the Seurat object
+### Label transfer from published dataset
 
-```{r saveRDS}
-saveRDS(experiment.integrated, file="scRNA_workshop-08.rds")
+The number of published single cell RNASeq dataset is increasing significantly as the technology matures. One application that takes advantage of the published dataset is to annotate a new single cell RNASeq dataset by label transfer. The procedure of transfer the cell type labels from the published dataset involves some similar processes as the integration of datasets. Both procedures are based on a fundamental concept of finding mutual nearest neighbors (MNN) to define anchors across different datasets.
+
+```{r}
+## prepare an example
+## read in the object that has celltype labels
+experiment.celltype <- readRDS("scRNA_workshop-05.rds")
+
+## read in the object that includes all samples, the same as in the above section
+experiment.aggregate <- readRDS("scRNA_workshop-02.rds")
+experiment.split <- SplitObject(experiment.aggregate, split.by = "orig.ident")
+rm(experiment.aggregate)
+
+experiment.split <- lapply(experiment.split, function(sce){
+  sce = NormalizeData(sce, normalization.method = "LogNormalize", scale.factor = 10000)
+  sce = CellCycleScoring(sce, s.features = cc.genes$s.genes, g2m.features = cc.genes$g2m.genes, set.ident = FALSE)
+  sce = FindVariableFeatures(sce, selection.method = "vst", nfeatures = 2000)
+  sce = ScaleData(sce, vars.to.regress = c("S.Score", "G2M.Score", "percent_MT", "nFeature_RNA"))
+## UMAP for visualization later
+  sce = RunPCA(sce)
+  sce = RunUMAP(sce, dims = 1:50, return.model = TRUE)
+})
+
+## use A001-C-007 as the reference, add celltype information from Part 5 rds (scRNA_workshop-05.rds)
+experiment.aggregate <- readRDS("scRNA_workshop-05.rds")
+experiment.split[["A001-C-007"]]@meta.data$celltype <- experiment.aggregate$subcluster_ScType_2tissue[match(colnames(experiment.split[["A001-C-007"]]), colnames(experiment.aggregate))]
+
+## find transfer anchors
+anchors <- FindTransferAnchors(reference = experiment.split[["A001-C-007"]],
+	query = experiment.split[["A001-C-104"]],
+	reduction = "pcaproject",
+	reference.reduction = "pca")
+celltype.predicted <- TransferData(anchorset = anchors,
+                                   refdata = experiment.split[["A001-C-007"]]$celltype)
+
+## assign predicted celltype to cells
+experiment.split[["A001-C-104"]] <- AddMetaData(experiment.split[["A001-C-104"]],
+                                                metadata = celltype.predicted)
+
+## project the query onto the reference UMAP structure
+experiment.split[["A001-C-104"]] <- MapQuery(anchorset = anchors,
+	reference = experiment.split[["A001-C-007"]],
+	query = experiment.split[["A001-C-104"]],
+	refdata = list(celltype = "celltype"),
+	reference.reduction = "pca", reduction.model = "umap")
+```
+
+Visualize the results.
+
+```{r fig.width = 12}
+DimPlot(experiment.split[["A001-C-104"]],
+        group.by = "predicted.id",
+        reduction = "ref.umap",
+        label = TRUE)
+DimPlot(experiment.split[["A001-C-104"]],
+        group.by = "predicted.id",
+        reduction = "umap",
+        label = TRUE)
 ```
 
 
