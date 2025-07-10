@@ -58,9 +58,9 @@ names(geneList) <- all.genes
 * Fisher: (Raw) p-value from Fisher's Exact Test
 
 ### Organisms other than human
-Many organisms have a database equivalent to org.Hs.eg.db on Bioconductor: https://www.bioconductor.org/packages/release/data/annotation/
+Many organisms have a database equivalent to org.Hs.eg.db on [Bioconductor](https://www.bioconductor.org/packages/release/data/annotation/).
 
-If not, and your organism is on NCBI (https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi) it's straightforward to create your own using the AnnotationForge R package and the function makeOrgPackageFromNCBI (https://bioconductor.org/packages/devel/bioc/vignettes/AnnotationForge/inst/doc/MakingNewOrganismPackages.html)
+If not, and your organism is on [NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi) it's straightforward to create your own using the AnnotationForge R package and the function [makeOrgPackageFromNCBI](https://bioconductor.org/packages/devel/bioc/vignettes/AnnotationForge/inst/doc/MakingNewOrganismPackages.html)
 
 ## 2. Model-based DE analysis in limma
 [limma](https://bioconductor.org/packages/release/bioc/html/limma.html) is an R package for differential expression analysis of bulk RNASeq and microarray data.  We apply it here to single cell data.
