@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Single Cell RNA-Seq Part 6: Enrichment and model-based differential expression"
 author: "Bioinformatics Core"
-date: "2025-07-04"
+date: "2025-07-10"
 output:
     html_document:
       keep_md: TRUE
@@ -66,100 +66,148 @@ names(geneList) <- all.genes
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> GO:0006338 </td>
-   <td style="text-align:left;"> chromatin remodeling </td>
-   <td style="text-align:right;"> 464 </td>
-   <td style="text-align:right;"> 39 </td>
-   <td style="text-align:right;"> 20.46 </td>
-   <td style="text-align:left;"> 7.3e-05 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> GO:0000381 </td>
    <td style="text-align:left;"> regulation of alternative mRNA splicing, via spliceosome </td>
-   <td style="text-align:right;"> 39 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 1.72 </td>
-   <td style="text-align:left;"> 0.00025 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 1.85 </td>
+   <td style="text-align:left;"> 6.9e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0006338 </td>
+   <td style="text-align:left;"> chromatin remodeling </td>
+   <td style="text-align:right;"> 918 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 41.41 </td>
+   <td style="text-align:left;"> 0.00028 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0035176 </td>
+   <td style="text-align:left;"> social behavior </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:left;"> 0.00033 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:2000650 </td>
+   <td style="text-align:left;"> negative regulation of sodium ion transmembrane transporter ... </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.18 </td>
+   <td style="text-align:left;"> 0.00035 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0051660 </td>
    <td style="text-align:left;"> establishment of centrosome localization </td>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.40 </td>
-   <td style="text-align:left;"> 0.00039 </td>
+   <td style="text-align:right;"> 0.41 </td>
+   <td style="text-align:left;"> 0.00043 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0006895 </td>
    <td style="text-align:left;"> Golgi to endosome transport </td>
    <td style="text-align:right;"> 17 </td>
    <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.75 </td>
-   <td style="text-align:left;"> 0.00065 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0042060 </td>
-   <td style="text-align:left;"> wound healing </td>
-   <td style="text-align:right;"> 252 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 11.11 </td>
-   <td style="text-align:left;"> 0.00074 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0045944 </td>
-   <td style="text-align:left;"> positive regulation of transcription by RNA polymerase II </td>
-   <td style="text-align:right;"> 810 </td>
-   <td style="text-align:right;"> 55 </td>
-   <td style="text-align:right;"> 35.71 </td>
-   <td style="text-align:left;"> 0.00076 </td>
+   <td style="text-align:right;"> 0.77 </td>
+   <td style="text-align:left;"> 0.00072 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0045053 </td>
    <td style="text-align:left;"> protein retention in Golgi apparatus </td>
    <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:left;"> 0.00080 </td>
+   <td style="text-align:right;"> 0.23 </td>
+   <td style="text-align:left;"> 0.00085 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0032534 </td>
    <td style="text-align:left;"> regulation of microvillus assembly </td>
    <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:left;"> 0.00080 </td>
+   <td style="text-align:right;"> 0.23 </td>
+   <td style="text-align:left;"> 0.00085 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0030036 </td>
+   <td style="text-align:left;"> actin cytoskeleton organization </td>
+   <td style="text-align:right;"> 482 </td>
+   <td style="text-align:right;"> 43 </td>
+   <td style="text-align:right;"> 21.74 </td>
+   <td style="text-align:left;"> 0.00093 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0044331 </td>
+   <td style="text-align:left;"> cell-cell adhesion mediated by cadherin </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1.22 </td>
+   <td style="text-align:left;"> 0.00107 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0009653 </td>
+   <td style="text-align:left;"> anatomical structure morphogenesis </td>
+   <td style="text-align:right;"> 1541 </td>
+   <td style="text-align:right;"> 107 </td>
+   <td style="text-align:right;"> 69.52 </td>
+   <td style="text-align:left;"> 0.00111 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0045944 </td>
+   <td style="text-align:left;"> positive regulation of transcription by RNA polymerase II </td>
+   <td style="text-align:right;"> 825 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 37.22 </td>
+   <td style="text-align:left;"> 0.00118 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:1902275 </td>
+   <td style="text-align:left;"> regulation of chromatin organization </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.90 </td>
+   <td style="text-align:left;"> 0.00161 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0042060 </td>
+   <td style="text-align:left;"> wound healing </td>
+   <td style="text-align:right;"> 261 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 11.77 </td>
+   <td style="text-align:left;"> 0.00162 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0007043 </td>
    <td style="text-align:left;"> cell-cell junction assembly </td>
-   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 91 </td>
    <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 3.88 </td>
-   <td style="text-align:left;"> 0.00113 </td>
+   <td style="text-align:right;"> 4.11 </td>
+   <td style="text-align:left;"> 0.00172 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0090257 </td>
+   <td style="text-align:left;"> regulation of muscle system process </td>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 5.77 </td>
+   <td style="text-align:left;"> 0.00184 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0031175 </td>
+   <td style="text-align:left;"> neuron projection development </td>
+   <td style="text-align:right;"> 591 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 26.66 </td>
+   <td style="text-align:left;"> 0.00185 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0070830 </td>
    <td style="text-align:left;"> bicellular tight junction assembly </td>
-   <td style="text-align:right;"> 39 </td>
+   <td style="text-align:right;"> 40 </td>
    <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 1.72 </td>
-   <td style="text-align:left;"> 0.00139 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0035176 </td>
-   <td style="text-align:left;"> social behavior </td>
-   <td style="text-align:right;"> 20 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.88 </td>
-   <td style="text-align:left;"> 0.00146 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:2000650 </td>
-   <td style="text-align:left;"> negative regulation of sodium ion transmembrane transporter ... </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.26 </td>
-   <td style="text-align:left;"> 0.00154 </td>
+   <td style="text-align:right;"> 1.80 </td>
+   <td style="text-align:left;"> 0.00185 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0048669 </td>
@@ -167,63 +215,15 @@ names(geneList) <- all.genes
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 0.09 </td>
-   <td style="text-align:left;"> 0.00194 </td>
+   <td style="text-align:left;"> 0.00203 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> GO:0031175 </td>
-   <td style="text-align:left;"> neuron projection development </td>
-   <td style="text-align:right;"> 570 </td>
-   <td style="text-align:right;"> 42 </td>
-   <td style="text-align:right;"> 25.13 </td>
-   <td style="text-align:left;"> 0.00195 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0002064 </td>
-   <td style="text-align:left;"> epithelial cell development </td>
-   <td style="text-align:right;"> 134 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 5.91 </td>
-   <td style="text-align:left;"> 0.00230 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0007015 </td>
-   <td style="text-align:left;"> actin filament organization </td>
-   <td style="text-align:right;"> 317 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 13.98 </td>
-   <td style="text-align:left;"> 0.00235 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0030155 </td>
-   <td style="text-align:left;"> regulation of cell adhesion </td>
-   <td style="text-align:right;"> 482 </td>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:right;"> 21.25 </td>
-   <td style="text-align:left;"> 0.00242 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0042752 </td>
-   <td style="text-align:left;"> regulation of circadian rhythm </td>
-   <td style="text-align:right;"> 80 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 3.53 </td>
-   <td style="text-align:left;"> 0.00259 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0030644 </td>
-   <td style="text-align:left;"> intracellular chloride ion homeostasis </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:left;"> 0.00261 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0030050 </td>
-   <td style="text-align:left;"> vesicle transport along actin filament </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:left;"> 0.00261 </td>
+   <td style="text-align:left;"> GO:0051674 </td>
+   <td style="text-align:left;"> localization of cell </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.09 </td>
+   <td style="text-align:left;"> 0.00203 </td>
   </tr>
 </tbody>
 </table>
@@ -232,10 +232,15 @@ names(geneList) <- all.genes
 * Expected: Under random chance, number of genes that would be expected to be annotated with that GO term and meeting our criteria for "expressed"
 * Fisher: (Raw) p-value from Fisher's Exact Test
 
+### Organisms other than human
+Many organisms have a database equivalent to org.Hs.eg.db on Bioconductor: https://www.bioconductor.org/packages/release/data/annotation/
+
+If not, and your organism is on NCBI (https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi) it's straightforward to create your own using the AnnotationForge R package and the function makeOrgPackageFromNCBI (https://bioconductor.org/packages/devel/bioc/vignettes/AnnotationForge/inst/doc/MakingNewOrganismPackages.html)
+
 ## 2. Model-based DE analysis in limma
 [limma](https://bioconductor.org/packages/release/bioc/html/limma.html) is an R package for differential expression analysis of bulk RNASeq and microarray data.  We apply it here to single cell data.
 
-Limma can be used to fit any linear model to expression data and is useful for analyses that go beyond two-group comparisons.  A detailed tutorial of model specification in limma is available [here](https://ucdavis-bioinformatics-training.github.io/2021-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes) and in the [limma User's Guide](https://www.bioconductor.org/packages/devel/bioc/vignettes/limma/inst/doc/usersguide.pdf).
+Limma can be used to fit any linear model to expression data and is useful for analyses that go beyond two-group comparisons.  A detailed tutorial of model specification in limma is available [here](https://ucdavis-bioinformatics-training.github.io/2025-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes) and in the [limma User's Guide](https://www.bioconductor.org/packages/devel/bioc/vignettes/limma/inst/doc/usersguide.pdf).
 
 
 ``` r
@@ -864,7 +869,7 @@ Pseudobulk DE may result in better false discovery rate control than cell-level 
 
 The Seurat function `AggregateExpression()` can be used to sum counts as described [here](https://satijalab.org/seurat/articles/de_vignette).
 
-A tutorial on using limma for bulk RNASeq is available [here](https://ucdavis-bioinformatics-training.github.io/2023-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes).
+A tutorial on using limma for bulk RNASeq is available [here](https://ucdavis-bioinformatics-training.github.io/2025-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes).
 
 ## Prepare for the next section
 
@@ -881,16 +886,19 @@ sessionInfo()
 ```
 
 ```
-## R version 4.4.3 (2025-02-28)
-## Platform: aarch64-apple-darwin20
-## Running under: macOS Ventura 13.7.1
+## R version 4.5.0 (2025-04-11 ucrt)
+## Platform: x86_64-w64-mingw32/x64
+## Running under: Windows 11 x64 (build 26100)
 ## 
 ## Matrix products: default
-## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
-## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+##   LAPACK version 3.12.1
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## [1] LC_COLLATE=English_United States.utf8 
+## [2] LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
 ## 
 ## time zone: America/Los_Angeles
 ## tzcode source: internal
@@ -900,56 +908,54 @@ sessionInfo()
 ## [8] base     
 ## 
 ## other attached packages:
-##  [1] org.Hs.eg.db_3.19.1  kableExtra_1.4.0     dplyr_1.1.4         
-##  [4] topGO_2.56.0         SparseM_1.82         GO.db_3.19.1        
-##  [7] AnnotationDbi_1.66.0 IRanges_2.38.0       S4Vectors_0.44.0    
-## [10] Biobase_2.64.0       graph_1.82.0         BiocGenerics_0.50.0 
-## [13] limma_3.60.2         Seurat_5.2.1         SeuratObject_5.0.2  
-## [16] sp_2.1-4            
+##  [1] org.Hs.eg.db_3.21.0  kableExtra_1.4.0     dplyr_1.1.4         
+##  [4] topGO_2.60.1         SparseM_1.84-2       GO.db_3.21.0        
+##  [7] AnnotationDbi_1.70.0 IRanges_2.42.0       S4Vectors_0.46.0    
+## [10] Biobase_2.68.0       graph_1.86.0         BiocGenerics_0.54.0 
+## [13] generics_0.1.4       limma_3.64.1         Seurat_5.3.0        
+## [16] SeuratObject_5.1.0   sp_2.2-0            
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] RColorBrewer_1.1-3      rstudioapi_0.16.0       jsonlite_1.8.8         
-##   [4] magrittr_2.0.3          spatstat.utils_3.1-2    rmarkdown_2.27         
-##   [7] zlibbioc_1.50.0         vctrs_0.6.5             ROCR_1.0-11            
-##  [10] memoise_2.0.1           spatstat.explore_3.2-7  htmltools_0.5.8.1      
-##  [13] sass_0.4.9              sctransform_0.4.1       parallelly_1.37.1      
-##  [16] KernSmooth_2.23-26      bslib_0.7.0             htmlwidgets_1.6.4      
-##  [19] ica_1.0-3               plyr_1.8.9              plotly_4.10.4          
-##  [22] zoo_1.8-12              cachem_1.1.0            igraph_2.0.3           
-##  [25] mime_0.12               lifecycle_1.0.4         pkgconfig_2.0.3        
-##  [28] Matrix_1.7-2            R6_2.5.1                fastmap_1.2.0          
-##  [31] GenomeInfoDbData_1.2.12 fitdistrplus_1.1-11     future_1.33.2          
-##  [34] shiny_1.8.1.1           digest_0.6.35           colorspace_2.1-0       
-##  [37] patchwork_1.2.0         tensor_1.5              RSpectra_0.16-1        
-##  [40] irlba_2.3.5.1           RSQLite_2.3.7           progressr_0.14.0       
-##  [43] fansi_1.0.6             spatstat.sparse_3.0-3   httr_1.4.7             
-##  [46] polyclip_1.10-6         abind_1.4-5             compiler_4.4.3         
-##  [49] bit64_4.0.5             DBI_1.2.3               fastDummies_1.7.3      
-##  [52] highr_0.11              MASS_7.3-64             tools_4.4.3            
-##  [55] lmtest_0.9-40           httpuv_1.6.15           future.apply_1.11.2    
-##  [58] goftest_1.2-3           glue_1.7.0              nlme_3.1-167           
-##  [61] promises_1.3.0          grid_4.4.3              Rtsne_0.17             
-##  [64] cluster_2.1.8           reshape2_1.4.4          generics_0.1.3         
-##  [67] gtable_0.3.5            spatstat.data_3.0-4     tidyr_1.3.1            
-##  [70] data.table_1.15.4       xml2_1.3.6              XVector_0.44.0         
-##  [73] utf8_1.2.4              spatstat.geom_3.2-9     RcppAnnoy_0.0.22       
-##  [76] ggrepel_0.9.5           RANN_2.6.1              pillar_1.9.0           
-##  [79] stringr_1.5.1           spam_2.10-0             RcppHNSW_0.6.0         
-##  [82] later_1.3.2             splines_4.4.3           lattice_0.22-6         
-##  [85] bit_4.0.5               survival_3.8-3          deldir_2.0-4           
-##  [88] tidyselect_1.2.1        Biostrings_2.72.0       miniUI_0.1.1.1         
-##  [91] pbapply_1.7-2           knitr_1.47              gridExtra_2.3          
-##  [94] svglite_2.1.3           scattermore_1.2         xfun_0.44              
-##  [97] statmod_1.5.0           matrixStats_1.3.0       UCSC.utils_1.0.0       
-## [100] stringi_1.8.4           lazyeval_0.2.2          yaml_2.3.8             
-## [103] evaluate_0.23           codetools_0.2-20        tibble_3.2.1           
-## [106] cli_3.6.2               uwot_0.2.2              systemfonts_1.1.0      
-## [109] xtable_1.8-4            reticulate_1.39.0       munsell_0.5.1          
-## [112] jquerylib_0.1.4         GenomeInfoDb_1.40.1     Rcpp_1.0.12            
-## [115] globals_0.16.3          spatstat.random_3.2-3   png_0.1-8              
-## [118] parallel_4.4.3          blob_1.2.4              ggplot2_3.5.1          
-## [121] dotCall64_1.1-1         listenv_0.9.1           viridisLite_0.4.2      
-## [124] scales_1.3.0            ggridges_0.5.6          crayon_1.5.2           
-## [127] purrr_1.0.2             rlang_1.1.3             KEGGREST_1.44.0        
-## [130] cowplot_1.1.3
+##   [1] RColorBrewer_1.1-3      rstudioapi_0.17.1       jsonlite_2.0.0         
+##   [4] magrittr_2.0.3          spatstat.utils_3.1-4    farver_2.1.2           
+##   [7] rmarkdown_2.29          vctrs_0.6.5             ROCR_1.0-11            
+##  [10] memoise_2.0.1           spatstat.explore_3.4-3  htmltools_0.5.8.1      
+##  [13] sass_0.4.10             sctransform_0.4.2       parallelly_1.45.0      
+##  [16] KernSmooth_2.23-26      bslib_0.9.0             htmlwidgets_1.6.4      
+##  [19] ica_1.0-3               plyr_1.8.9              plotly_4.11.0          
+##  [22] zoo_1.8-14              cachem_1.1.0            igraph_2.1.4           
+##  [25] mime_0.13               lifecycle_1.0.4         pkgconfig_2.0.3        
+##  [28] Matrix_1.7-3            R6_2.6.1                fastmap_1.2.0          
+##  [31] GenomeInfoDbData_1.2.14 fitdistrplus_1.2-4      future_1.58.0          
+##  [34] shiny_1.11.1            digest_0.6.37           patchwork_1.3.1        
+##  [37] tensor_1.5.1            RSpectra_0.16-2         irlba_2.3.5.1          
+##  [40] textshaping_1.0.1       RSQLite_2.4.1           progressr_0.15.1       
+##  [43] spatstat.sparse_3.1-0   httr_1.4.7              polyclip_1.10-7        
+##  [46] abind_1.4-8             compiler_4.5.0          bit64_4.6.0-1          
+##  [49] DBI_1.2.3               fastDummies_1.7.5       MASS_7.3-65            
+##  [52] tools_4.5.0             lmtest_0.9-40           httpuv_1.6.16          
+##  [55] future.apply_1.20.0     goftest_1.2-3           glue_1.8.0             
+##  [58] nlme_3.1-168            promises_1.3.3          grid_4.5.0             
+##  [61] Rtsne_0.17              cluster_2.1.8.1         reshape2_1.4.4         
+##  [64] gtable_0.3.6            spatstat.data_3.1-6     tidyr_1.3.1            
+##  [67] data.table_1.17.6       xml2_1.3.8              XVector_0.48.0         
+##  [70] spatstat.geom_3.4-1     RcppAnnoy_0.0.22        ggrepel_0.9.6          
+##  [73] RANN_2.6.2              pillar_1.11.0           stringr_1.5.1          
+##  [76] spam_2.11-1             RcppHNSW_0.6.0          later_1.4.2            
+##  [79] splines_4.5.0           lattice_0.22-7          survival_3.8-3         
+##  [82] bit_4.6.0               deldir_2.0-4            tidyselect_1.2.1       
+##  [85] Biostrings_2.76.0       miniUI_0.1.2            pbapply_1.7-2          
+##  [88] knitr_1.50              gridExtra_2.3           svglite_2.2.1          
+##  [91] scattermore_1.2         xfun_0.52               statmod_1.5.0          
+##  [94] matrixStats_1.5.0       UCSC.utils_1.4.0        stringi_1.8.7          
+##  [97] lazyeval_0.2.2          yaml_2.3.10             evaluate_1.0.4         
+## [100] codetools_0.2-20        tibble_3.3.0            cli_3.6.5              
+## [103] uwot_0.2.3              systemfonts_1.2.3       xtable_1.8-4           
+## [106] reticulate_1.42.0       jquerylib_0.1.4         GenomeInfoDb_1.44.0    
+## [109] Rcpp_1.1.0              globals_0.18.0          spatstat.random_3.4-1  
+## [112] png_0.1-8               spatstat.univar_3.1-3   parallel_4.5.0         
+## [115] ggplot2_3.5.2           blob_1.2.4              dotCall64_1.2          
+## [118] listenv_0.9.1           viridisLite_0.4.2       scales_1.4.0           
+## [121] ggridges_0.5.6          crayon_1.5.3            purrr_1.0.4            
+## [124] rlang_1.1.6             KEGGREST_1.48.1         cowplot_1.2.0
 ```
