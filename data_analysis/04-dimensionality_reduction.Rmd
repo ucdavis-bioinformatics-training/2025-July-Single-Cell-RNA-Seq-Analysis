@@ -100,7 +100,7 @@ The JackStraw function randomly permutes a subset of data, and calculates projec
 PCs with a strong enrichment of low p-value genes are identified as significant components.
 
 **The JackStraw permutation is computationally intensive and can be quite slow. Consider skipping this step and exploring the function when you have some extra time.**
-```{r jackstraw, eval=T, fig.height = 22, fig.width = 12}
+```{r jackstraw, eval=F, fig.height = 22, fig.width = 12}
 experiment.aggregate <- JackStraw(experiment.aggregate, dims = 100)
 experiment.aggregate <- ScoreJackStraw(experiment.aggregate, dims = 1:100)
 JackStrawPlot(object = experiment.aggregate, dims = 1:100) +
