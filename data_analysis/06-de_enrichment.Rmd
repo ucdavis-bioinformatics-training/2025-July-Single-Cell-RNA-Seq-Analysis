@@ -57,10 +57,15 @@ names(geneList) <- all.genes
 * Expected: Under random chance, number of genes that would be expected to be annotated with that GO term and meeting our criteria for "expressed"
 * Fisher: (Raw) p-value from Fisher's Exact Test
 
+### Organisms other than human
+Many organisms have a database equivalent to org.Hs.eg.db on [Bioconductor](https://www.bioconductor.org/packages/release/data/annotation/).
+
+If not, and your organism is on [NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi) it's straightforward to create your own using the AnnotationForge R package and the function [makeOrgPackageFromNCBI](https://bioconductor.org/packages/devel/bioc/vignettes/AnnotationForge/inst/doc/MakingNewOrganismPackages.html)
+
 ## 2. Model-based DE analysis in limma
 [limma](https://bioconductor.org/packages/release/bioc/html/limma.html) is an R package for differential expression analysis of bulk RNASeq and microarray data.  We apply it here to single cell data.
 
-Limma can be used to fit any linear model to expression data and is useful for analyses that go beyond two-group comparisons.  A detailed tutorial of model specification in limma is available [here](https://ucdavis-bioinformatics-training.github.io/2021-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes) and in the [limma User's Guide](https://www.bioconductor.org/packages/devel/bioc/vignettes/limma/inst/doc/usersguide.pdf).
+Limma can be used to fit any linear model to expression data and is useful for analyses that go beyond two-group comparisons.  A detailed tutorial of model specification in limma is available [here](https://ucdavis-bioinformatics-training.github.io/2025-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes) and in the [limma User's Guide](https://www.bioconductor.org/packages/devel/bioc/vignettes/limma/inst/doc/usersguide.pdf).
 
 ```{r DE}
 # filter genes to those expressed in at least 10% of cells
@@ -121,7 +126,7 @@ Pseudobulk DE may result in better false discovery rate control than cell-level 
 
 The Seurat function `AggregateExpression()` can be used to sum counts as described [here](https://satijalab.org/seurat/articles/de_vignette).
 
-A tutorial on using limma for bulk RNASeq is available [here](https://ucdavis-bioinformatics-training.github.io/2023-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes).
+A tutorial on using limma for bulk RNASeq is available [here](https://ucdavis-bioinformatics-training.github.io/2025-June-RNA-Seq-Analysis/data_analysis/DE_Analysis_mm_with_quizzes).
 
 ## Prepare for the next section
 
